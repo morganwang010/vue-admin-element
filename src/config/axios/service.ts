@@ -14,8 +14,9 @@ import { ElMessage } from 'element-plus'
 
 const { result_code, base_url } = config
 
-export const PATH_URL = base_url[import.meta.env.VITE_API_BASEPATH]
-
+export const PATH_URL = base_url[import.meta.env.VITE_API_BASE_URL]
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
+console.log(import.meta.env.VITE_API_BASE_URL)
 // 创建axios实例
 const service: AxiosInstance = axios.create({
   baseURL: PATH_URL, // api 的 base_url
@@ -36,6 +37,7 @@ service.interceptors.request.use(
     // get参数编码
     if (config.method === 'get' && config.params) {
       let url = config.url as string
+      console.log(config.baseURL)
       url += '?'
       const keys = Object.keys(config.params)
       for (const key of keys) {

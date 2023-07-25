@@ -2,14 +2,14 @@
 import { ContentWrap } from '@/components/ContentWrap'
 import { useI18n } from '@/hooks/web/useI18n'
 import { Table } from '@/components/Table'
-import { getTableListApi } from '@/api/table'
-import { ContactTableData } from '@/api/table/types'
+import { getTableListApi } from '@/api/contract'
+import { ContractTableData } from '@/api/contract/types'
 import { ref, h, reactive, unref } from 'vue'
 import { ElTag, ElButton } from 'element-plus'
 import { useTable } from '@/hooks/web/useTable'
 import { Pagination, TableColumn, TableSlotDefault } from '@/types/table'
 
-const { register, tableObject, methods, elTableRef } = useTable<ContactTableData>({
+const { register, tableObject, methods, elTableRef } = useTable<ContractTableData>({
   getListApi: getTableListApi,
   response: {
     list: 'list',
@@ -25,7 +25,7 @@ const {
   register: register2,
   tableObject: tableObject2,
   methods: methods2
-} = useTable<ContactTableData>({
+} = useTable<ContractTableData>({
   getListApi: getTableListApi,
   response: {
     list: 'list',

@@ -1,0 +1,48 @@
+# 服务端启动配置
+server:
+  port: 8000
+  runenv: dev
+
+# MySQL数据库配置
+pgsql:
+  host: 10.122.181.22
+  port: 5432
+  username: postgres
+  password: 1qaz@WSX
+  dbname: drmp
+  maxIdleConns: 10
+  maxOpenConns: 100
+  connMaxLifetime: 3600
+  dbFile: /home/ubuntu/crmapi/crm.sql
+
+# Redis数据库配置
+redis:
+  host: 10.122.181.22
+  port: 6379
+  password: 1234
+  database: 0
+
+# JWT配置
+jwt:
+  signingKey: z3d6k8v0n3w7m9sa1fd0u09h
+  expiredTime: 604800
+
+# 文件存储配置
+file:
+  path: /home/ubuntu/crm/source/
+
+# 邮件服务配置
+mail:
+  smtp: smtp.qq.com
+  secret: dhsepilzlvoaceij
+  sender: 1655064994@qq.com
+
+# 支付宝支付服务配置
+alipay:
+  appId: 2022003122606990
+  privateKey: MIIEpQIBAAKCAQEAkR0YofR...2sDd6uIy9rkpk8azj/rLmetW5r+tqTZgxcPWKeSz4=
+  appPublicCert: /home/ubuntu/crm/cert/appPublicCert.crt
+  alipayRootCert: /home/ubuntu/crm/cert/alipayRootCert.crt
+  alipayPublicCert: /home/ubuntu/crm/cert/alipayPublicCert.crt
+  returnURL: http://127.0.0.1:8060/#/subscribe
+  notifyURL: http://127.0.0.1:8000/api/subscribe/payback

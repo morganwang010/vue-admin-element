@@ -78,20 +78,6 @@ const schema = reactive<FormSchema[]>([
     colProps: {
       span: 24
     }
-  },
-  {
-    field: 'other',
-    component: 'Divider',
-    label: t('login.otherLogin'),
-    componentProps: {
-      contentPosition: 'center'
-    }
-  },
-  {
-    field: 'otherIcon',
-    colProps: {
-      span: 24
-    }
   }
 ])
 
@@ -128,9 +114,11 @@ const signIn = async () => {
 
       try {
         const res = await loginApi(formData)
+        console.log(res)
 
         if (res) {
           wsCache.set(appStore.getUserInfo, res.data)
+          console.log('eeeeeeeeee')
           // 是否使用动态路由
           if (appStore.getDynamicRouter) {
             getRole()
@@ -144,6 +132,7 @@ const signIn = async () => {
           }
         }
       } finally {
+        console.log('tttttttttt')
         loading.value = false
       }
     }
@@ -215,35 +204,6 @@ const toRegister = () => {
         <ElButton class="w-[100%]" @click="toRegister">
           {{ t('login.register') }}
         </ElButton>
-      </div>
-    </template>
-
-    <template #otherIcon>
-      <div class="flex justify-between w-[100%]">
-        <Icon
-          icon="ant-design:github-filled"
-          :size="iconSize"
-          class="cursor-pointer anticon"
-          :color="iconColor"
-        />
-        <Icon
-          icon="ant-design:wechat-filled"
-          :size="iconSize"
-          class="cursor-pointer anticon"
-          :color="iconColor"
-        />
-        <Icon
-          icon="ant-design:alipay-circle-filled"
-          :size="iconSize"
-          :color="iconColor"
-          class="cursor-pointer anticon"
-        />
-        <Icon
-          icon="ant-design:weibo-circle-filled"
-          :size="iconSize"
-          :color="iconColor"
-          class="cursor-pointer anticon"
-        />
       </div>
     </template>
   </Form>

@@ -104,35 +104,35 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       }
     ]
   },
+  // {
+  //   path: '/guide',
+  //   component: Layout,
+  //   name: 'Guide',
+  //   meta: {},
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/Guide/Guide.vue'),
+  //       name: 'GuideDemo',
+  //       meta: {
+  //         title: t('router.guide'),
+  //         icon: 'cib:telegram-plane'
+  //       }
+  //     }
+  //   ]
+  // },
   {
-    path: '/guide',
-    component: Layout,
-    name: 'Guide',
-    meta: {},
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/Guide/Guide.vue'),
-        name: 'GuideDemo',
-        meta: {
-          title: t('router.guide'),
-          icon: 'cib:telegram-plane'
-        }
-      }
-    ]
-  },
-  {
-    path: '/contact',
+    path: '/contract',
     component: Layout,
     name: 'Contact',
     meta: {},
     children: [
       {
         path: 'index',
-        component: () => import('@/views/Contact/ContactNew.vue'),
+        component: () => import('@/views/Contract/Contract.vue'),
         name: 'Contact',
         meta: {
-          title: t('router.contact'),
+          title: t('router.contract'),
           icon: 'cib:telegram-plane'
         }
       }

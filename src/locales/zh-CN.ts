@@ -145,7 +145,7 @@ export default {
     document: '文档',
     inputPassword: '密码输入框',
     sticky: '黏性',
-    contact: '合同管理'
+    contract: '合同管理'
   },
   permission: {
     hasPermission: '请设置操作权限值'
@@ -407,7 +407,10 @@ export default {
     hiddenExpandedRows: '隐藏展开行',
     changeTitle: '修改标题',
     header: '头部',
-    selectAllNone: '全选/全不选'
+    selectAllNone: '全选/全不选',
+    edit: '编辑',
+    delete: '删除',
+    lock: '锁定'
   },
 
   richText: {
