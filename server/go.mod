@@ -1,4 +1,4 @@
-module crm
+module vue-admin-element
 
 go 1.19
 

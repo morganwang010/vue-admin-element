@@ -1,10 +1,10 @@
 package service
 
 import (
-	"crm/common"
-	"crm/dao"
-	"crm/models"
-	"crm/response"
+	"vue-admin-element/common"
+	"vue-admin-element/dao"
+	"vue-admin-element/models"
+	"vue-admin-element/response"
 	"strconv"
 	"time"
 )

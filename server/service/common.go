@@ -1,16 +1,16 @@
 package service
 
 import (
-	"crm/dao"
-	"crm/models"
-	"crm/response"
+	"vue-admin-element/dao"
+	"vue-admin-element/models"
+	"vue-admin-element/response"
 	"mime/multipart"
 )
 
 const (
 
 	// 数据库表名
-	USER      = "user"
+	USER      = "public.user"
 	CUSTOMER  = "customer"
 	CONTRACT  = "contract"
 	PRODUCT   = "product"

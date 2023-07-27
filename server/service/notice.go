@@ -1,9 +1,9 @@
 package service
 
 import (
-	"crm/dao"
-	"crm/models"
-	"crm/response"
+	"vue-admin-element/dao"
+	"vue-admin-element/models"
+	"vue-admin-element/response"
 )
 
 type NoticeService struct {

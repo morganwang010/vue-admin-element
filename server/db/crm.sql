@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 80031 (8.0.31)
  Source Host           : localhost:3306
- Source Schema         : crm
+ Source Schema         : vue-admin-element
 
  Target Server Type    : MySQL
  Target Server Version : 80031 (8.0.31)

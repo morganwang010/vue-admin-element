@@ -1,7 +1,7 @@
 package common
 
 import (
-	"crm/global"
+	"vue-admin-element/global"
 	"time"
 
 	"github.com/golang-jwt/jwt/v4"
@@ -18,7 +18,7 @@ func GenToken(uid int64) (string, error) {
 	var expiredTime = global.Config.Jwt.ExpiredTime
 	claims := Claims{uid, jwt.RegisteredClaims{
 		ExpiresAt: &jwt.NumericDate{Time: time.Now().Add(time.Duration(expiredTime) * time.Second)},
-		Issuer:    "crm",
+		Issuer:    "vue-admin-element",
 	}}
 	token, err := jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString(signingKey)
 	return token, err

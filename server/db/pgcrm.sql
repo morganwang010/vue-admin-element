@@ -2,7 +2,7 @@ CREATE TABLE public.user (
   id serial PRIMARY KEY,
   email character varying(30) DEFAULT NULL,
   password character varying(200) DEFAULT NULL,
-  username character varying(10) DEFAULT NULL,
+  name character varying(10) DEFAULT NULL,
   status smallint DEFAULT '1',
   created bigint DEFAULT NULL,
   updated bigint DEFAULT NULL
@@ -100,5 +100,3 @@ CREATE TABLE public.mail_config (
 
 INSERT INTO public.mail_config (id, stmp, port, auth_code, email, status, creator, created, updated)
 VALUES (11, 'smtp.qq.com', 465, 'zrzxsebacrpfdaeg', '200300666@qq.com', 2, 29, 1674901189, 1674901237);
-
-ALTER TABLE public."user" ADD COLUMN realname varchar(255) NULL;

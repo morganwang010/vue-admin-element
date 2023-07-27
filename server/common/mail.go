@@ -1,8 +1,8 @@
 package common
 
 import (
-	"crm/global"
-	"crm/models"
+	"vue-admin-element/global"
+	"vue-admin-element/models"
 	"crypto/tls"
 	"fmt"
 	"log"

@@ -1,10 +1,10 @@
 package api
 
 import (
-	"crm/common"
-	"crm/models"
-	"crm/response"
-	"crm/service"
+	"vue-admin-element/common"
+	"vue-admin-element/models"
+	"vue-admin-element/response"
+	"vue-admin-element/service"
 	"net/http"
 	"strconv"
 

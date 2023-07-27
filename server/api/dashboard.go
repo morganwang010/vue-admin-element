@@ -1,8 +1,8 @@
 package api
 
 import (
-	"crm/response"
-	"crm/service"
+	"vue-admin-element/response"
+	"vue-admin-element/service"
 	"strconv"
 
 	"github.com/gin-gonic/gin"

@@ -1,11 +1,11 @@
 package dao
 
 import (
-	"crm/global"
-	"crm/models"
 	"fmt"
 	"strconv"
 	"time"
+	"vue-admin-element/global"
+	"vue-admin-element/models"
 
 	"gorm.io/gorm"
 )
@@ -36,7 +36,7 @@ func (u *UserDao) UpdatePass(email, password string) error {
 }
 
 func (u *UserDao) IsExists(username string) bool {
-	rows := global.Db.Table("public.user").Where("username = ?", username).First(&models.User{}).RowsAffected
+	rows := global.Db.Table(USER).Where("username = ?", username).First(&models.User{}).RowsAffected
 	return rows != NumberNull
 }
 

@@ -1,14 +1,17 @@
 package models
 
 type User struct {
-	Id       int64  `gorm:"primaryKey"`
-	Email    string `gorm:"email"`
-	Password string `gorm:"password"`
-	RealName string `gorm:"realname"`
-	UserName string `gorm:"username"`
-	Status   int    `gorm:"status"`
-	Created  int64  `gorm:"created"`
-	Updated  int64  `gorm:"updated"`
+	Id          int64  `gorm:"primaryKey"`
+	Email       string `gorm:"email"`
+	Password    string `gorm:"password"`
+	Status      int    `gorm:"status"`
+	Created     int64  `gorm:"created"`
+	Updated     int64  `gorm:"updated"`
+	Permissions string `gorm:"permissions"`
+	Role        string `gorm:"role"`
+	Address     string `gorm:"address"`
+	Username    string `gorm:"username"`
+	Realname    string `gorm:"realname"`
 }
 
 type UserCreateParam struct {
@@ -24,8 +27,8 @@ type UserDeleteParam struct {
 }
 
 type UserLoginParam struct {
-	UserName string `json:"username" form:"username" binding:"required"`
-	Password string `json:"password" form:"password" binding:"required"`
+	Username string `json:"username" binding:"required"`
+	Password string `json:"password" binding:"required"`
 }
 
 type UserVerifyCodeParam struct {
@@ -39,11 +42,11 @@ type UserPassParam struct {
 }
 
 type UserInfo struct {
-	Uid   int64  `json:"uid"`
-	UserName string `json:"username"`
-	Role string `json:"role"`
-	Token string `json:"token"`
+	Uid         int64  `json:"uid"`
+	Role        string `json:"role"`
+	Username    string `json:"username"`
 	Permissions string `json:"permissions"`
+	Token       string `json:"token"`
 }
 
 type UserPersonInfo struct {

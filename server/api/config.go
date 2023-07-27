@@ -1,9 +1,9 @@
 package api
 
 import (
-	"crm/models"
-	"crm/response"
-	"crm/service"
+	"vue-admin-element/models"
+	"vue-admin-element/response"
+	"vue-admin-element/service"
 	"log"
 	"strconv"
 

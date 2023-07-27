@@ -1,9 +1,9 @@
 package initialize
 
 import (
-	"crm/api"
-	"crm/global"
-	"crm/middleware"
+	"vue-admin-element/api"
+	"vue-admin-element/global"
+	"vue-admin-element/middleware"
 	"fmt"
 
 	"github.com/gin-gonic/gin"

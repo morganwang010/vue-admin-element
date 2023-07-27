@@ -1,11 +1,12 @@
 import request from '@/config/axios'
 import type { UserType } from './types'
+import { StringifyOptions } from 'querystring'
 
 interface RoleParams {
   roleName: string
 }
 
-export const loginApi = (data: UserType): Promise<IResponse<UserType>> => {
+export const loginApi = (data: UserType): Promise<IResponse> => {
   console.log(data)
   return request.post({ url: '/user/login', data })
 }
@@ -32,4 +33,13 @@ export const getAdminRoleApi = (
 
 export const getTestRoleApi = (params: RoleParams): Promise<IResponse<string[]>> => {
   return request.get({ url: '/role/list', params })
+}
+
+export const loginApiTest = (data: UserType): Promise<IResponse> => {
+  console.log(data)
+  return {
+    code: 0,
+    message: 'bbbb',
+    data: 'ddd'
+  }
 }

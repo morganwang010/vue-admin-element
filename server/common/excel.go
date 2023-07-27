@@ -1,7 +1,7 @@
 package common
 
 import (
-	"crm/global"
+	"vue-admin-element/global"
 	"log"
 	"reflect"
 	"strconv"

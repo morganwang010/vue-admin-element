@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"crm/common"
-	"crm/response"
+	"vue-admin-element/common"
+	"vue-admin-element/response"
 	"strconv"
 
 	"github.com/gin-gonic/gin"

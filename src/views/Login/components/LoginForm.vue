@@ -114,7 +114,10 @@ const signIn = async () => {
 
       try {
         const res = await loginApi(formData)
+        // const res = await loginApiTest(formData)
+        console.log('5555')
         console.log(res)
+        console.log(res.data.message)
 
         if (res) {
           wsCache.set(appStore.getUserInfo, res.data)
@@ -131,7 +134,8 @@ const signIn = async () => {
             push({ path: redirect.value || permissionStore.addRouters[0].path })
           }
         }
-      } finally {
+      } catch (error) {
+        console.log(error)
         console.log('tttttttttt')
         loading.value = false
       }

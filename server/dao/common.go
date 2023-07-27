@@ -2,21 +2,21 @@ package dao
 
 import (
 	"context"
-	"crm/common"
-	"crm/global"
-	"crm/models"
 	"io"
 	"log"
 	"mime/multipart"
 	"os"
 	"path"
 	"strings"
+	"vue-admin-element/common"
+	"vue-admin-element/global"
+	"vue-admin-element/models"
 )
 
 const (
 
 	// 数据库表名
-	USER        = "user"
+	USER        = "public.user"
 	CUSTOMER    = "customer"
 	CONTRACT    = "contract"
 	PRODUCT     = "product"

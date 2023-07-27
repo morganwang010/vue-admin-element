@@ -1,12 +1,12 @@
 package service
 
 import (
-	"crm/common"
-	"crm/dao"
-	"crm/models"
-	"crm/response"
 	"fmt"
 	"log"
+	"vue-admin-element/common"
+	"vue-admin-element/dao"
+	"vue-admin-element/models"
+	"vue-admin-element/response"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -91,18 +91,19 @@ func (u *UserService) Register(param *models.UserCreateParam) int {
 
 // 用户登录
 func (u *UserService) Login(param *models.UserLoginParam) (*models.UserInfo, int) {
-
+	fmt.Printf("aaaaaaaaaaaaa")
 	// 判断用户是否存在
-	if !u.userDao.IsExists(param.UserName) {
+	if !u.userDao.IsExists(param.Username) {
 		return nil, response.ErrCodeUserNotExist
 	}
+	fmt.Printf("ddddddddd")
 
 	// 获取用户信息
-	user, err := u.userDao.GetUser(param.UserName)
+	user, err := u.userDao.GetUser(param.Username)
 	if err != nil {
-		return nil, response.ErrCodeFailed
+		return nil, response.SuccessResultCode
 	}
-	fmt.Printf("dddddddd2")
+
 	// 校验账号密码
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(param.Password))
 	if err != nil {
@@ -117,11 +118,11 @@ func (u *UserService) Login(param *models.UserLoginParam) (*models.UserInfo, int
 	}
 
 	userInfo := models.UserInfo{
-		Uid:   user.Id,
-		UserName: user.UserName,
-		Role: user.Role,
-		Token: token,
-		Permission: Permissions
+		Uid:         user.Id,
+		Role:        user.Role,
+		Username:    user.Username,
+		Permissions: user.Permissions,
+		Token:       token,
 	}
 
 	// 登录通知
@@ -130,7 +131,7 @@ func (u *UserService) Login(param *models.UserLoginParam) (*models.UserInfo, int
 		Creator: userInfo.Uid,
 	})
 
-	return &userInfo, response.ErrCodeSuccess
+	return &userInfo, response.SuccessResultCode
 }
 
 // 获取验证码

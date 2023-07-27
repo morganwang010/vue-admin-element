@@ -1,11 +1,12 @@
 package response
 
 const (
-	ErrCodeSuccess      = 0 // 成功
-	ErrCodeFailed       = 1 // 失败
-	ErrCodeParamInvalid = 2 // 请求参数无效
-	ErrCodeNoLogin      = 3 // 未登录或非法访问
-	ErrCodeTokenExpire  = 4 // Token过期
+	SuccessResultCode   = 0 //成功码
+	ErrCodeSuccess      = 5    // 成功
+	ErrCodeFailed       = 1    // 失败
+	ErrCodeParamInvalid = 2    // 请求参数无效
+	ErrCodeNoLogin      = 3    // 未登录或非法访问
+	ErrCodeTokenExpire  = 4    // Token过期
 
 	ErrCodeInitDataFailed   = 10 // 初始化数据失败
 	ErrCodeFileUploadFailed = 11 // 文件上传失败
@@ -34,6 +35,7 @@ const (
 )
 
 var msg = map[int]string{
+	SuccessResultCode:           "success result",
 	ErrCodeSuccess:              "success",
 	ErrCodeFailed:               "failed",
 	ErrCodeParamInvalid:         "param invalid",

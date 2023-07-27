@@ -1,7 +1,7 @@
 package global
 
 import (
-	"crm/config"
+	"vue-admin-element/config"
 
 	"github.com/go-pay/gopay/alipay"
 	"github.com/go-redis/redis/v9"

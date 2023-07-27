@@ -13,7 +13,7 @@ pgsql:
   maxIdleConns: 10
   maxOpenConns: 100
   connMaxLifetime: 3600
-  dbFile: /home/ubuntu/crmapi/crm.sql
+  dbFile: /home/ubuntu/crmapi/vue-admin-element.sql
 
 # Redis数据库配置
 redis:
@@ -29,7 +29,7 @@ jwt:
 
 # 文件存储配置
 file:
-  path: /home/ubuntu/crm/source/
+  path: /home/ubuntu/vue-admin-element/source/
 
 # 邮件服务配置
 mail:
@@ -41,8 +41,8 @@ mail:
 alipay:
   appId: 2022003122606990
   privateKey: MIIEpQIBAAKCAQEAkR0YofR...2sDd6uIy9rkpk8azj/rLmetW5r+tqTZgxcPWKeSz4=
-  appPublicCert: /home/ubuntu/crm/cert/appPublicCert.crt
-  alipayRootCert: /home/ubuntu/crm/cert/alipayRootCert.crt
-  alipayPublicCert: /home/ubuntu/crm/cert/alipayPublicCert.crt
+  appPublicCert: /home/ubuntu/vue-admin-element/cert/appPublicCert.crt
+  alipayRootCert: /home/ubuntu/vue-admin-element/cert/alipayRootCert.crt
+  alipayPublicCert: /home/ubuntu/vue-admin-element/cert/alipayPublicCert.crt
   returnURL: http://127.0.0.1:8060/#/subscribe
   notifyURL: http://127.0.0.1:8000/api/subscribe/payback

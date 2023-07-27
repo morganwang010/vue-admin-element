@@ -2,7 +2,7 @@ package common
 
 import (
 	"context"
-	"crm/global"
+	"vue-admin-element/global"
 	"net/http"
 	"strconv"
 	"time"

@@ -1,7 +1,7 @@
 package initialize
 
 import (
-	"crm/global"
+	"vue-admin-element/global"
 	"fmt"
 	"time"
 

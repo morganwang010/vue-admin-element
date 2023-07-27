@@ -1,6 +1,6 @@
 package main
 
-import "crm/initialize"
+import "vue-admin-element/initialize"
 
 func main() {
 	initialize.Run()
