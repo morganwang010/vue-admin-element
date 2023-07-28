@@ -1,12 +1,13 @@
 package api
 
 import (
+	"strconv"
 	"vue-admin-element/models"
 	"vue-admin-element/response"
 	"vue-admin-element/service"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
 )
 
 type ContractApi struct {
@@ -68,6 +69,10 @@ func (c *ContractApi) GetList(context *gin.Context) {
 	param.Creator = int64(uid)
 	productList, rows, errCode := c.contractService.GetList(&param)
 	response.PageResult(errCode, productList, rows, context)
+}
+func (c *ContractApi) GetList1(context *gin.Context) {
+	log.Printf("aaa")
+	return
 }
 
 // 查询合同信息

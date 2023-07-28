@@ -6,4 +6,5 @@ func Run() {
 	Redis()
 	Alipay()
 	Router()
+	Logrus()
 }

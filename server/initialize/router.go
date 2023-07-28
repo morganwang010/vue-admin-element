@@ -5,11 +5,16 @@ import (
 	"vue-admin-element/global"
 	"vue-admin-element/middleware"
 	"fmt"
-
+	"log"
+	"os"
 	"github.com/gin-gonic/gin"
 )
 
 func Router() {
+	log.SetOutput(os.Stdout)
+	log.SetFlags(log.LstdFlags | log.Lmicroseconds)
+	log.SetOutput(gin.DefaultWriter) // gin.DefaultWriter 是指向 os.Stdout 的 io.Writer 接口
+
 	engine := gin.Default()
 
 	// 开启跨域
@@ -33,7 +38,7 @@ func Router() {
 		route.DELETE("/common/file/remove", api.NewCommonApi().FileRemove)
 
 		// Jwt中间件
-		route.Use(middleware.JwtAuth())
+		// route.Use(middleware.JwtAuth())       
 
 		// 客户模块
 		route.GET("/customer/list", api.NewCustomerApi().GetList)
@@ -81,6 +86,12 @@ func Router() {
 		route.GET("/notice/count", api.NewNoticeApi().GetUnReadCount)
 		route.PUT("/notice/update", api.NewNoticeApi().Update)
 		route.DELETE("/notice/delete", api.NewNoticeApi().Delete)
+
+		// 字典模块
+		route.GET("/dict/list", api.NewDictApi().GetList)
+		// route.GET("/notice/count", api.NewNoticeApi().GetUnReadCount)
+		// route.PUT("/notice/update", api.NewNoticeApi().Update)
+		// route.DELETE("/notice/delete", api.NewNoticeApi().Delete)
 	}
 
 	// 启动、监听端口

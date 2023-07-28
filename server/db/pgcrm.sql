@@ -1,3 +1,10 @@
+
+  CREATE TABLE public.role (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+
+
 CREATE TABLE public.user (
   id serial PRIMARY KEY,
   email character varying(30) DEFAULT NULL,
@@ -100,3 +107,5 @@ CREATE TABLE public.mail_config (
 
 INSERT INTO public.mail_config (id, stmp, port, auth_code, email, status, creator, created, updated)
 VALUES (11, 'smtp.qq.com', 465, 'zrzxsebacrpfdaeg', '200300666@qq.com', 2, 29, 1674901189, 1674901237);
+
+

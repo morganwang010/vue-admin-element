@@ -130,7 +130,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       {
         path: 'index',
         component: () => import('@/views/Contract/Contract.vue'),
-        name: 'Contact',
+        name: 'Contract',
         meta: {
           title: t('router.contract'),
           icon: 'cib:telegram-plane'

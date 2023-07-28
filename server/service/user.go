@@ -91,12 +91,12 @@ func (u *UserService) Register(param *models.UserCreateParam) int {
 
 // 用户登录
 func (u *UserService) Login(param *models.UserLoginParam) (*models.UserInfo, int) {
-	fmt.Printf("aaaaaaaaaaaaa")
+ 
 	// 判断用户是否存在
 	if !u.userDao.IsExists(param.Username) {
 		return nil, response.ErrCodeUserNotExist
 	}
-	fmt.Printf("ddddddddd")
+ 
 
 	// 获取用户信息
 	user, err := u.userDao.GetUser(param.Username)

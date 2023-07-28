@@ -1,9 +1,11 @@
 package dao
 
 import (
+	"time"
 	"vue-admin-element/global"
 	"vue-admin-element/models"
-	"time"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type ContractDao struct {
@@ -59,16 +61,20 @@ func (c *ContractDao) GetList(param *models.ContractQueryParam) ([]*models.Contr
 	// 分页查询
 	offset := (param.Page.PageNum - 1) * param.Page.PageSize
 	db := global.Db.Offset(offset).Limit(param.Page.PageSize).Table(CONTRACT).Select(field)
-	
+
 	var rows int64
 	if param.Id != NumberNull {
 		db.Joins(where+" and contract.id = ?", param.Creator, param.Id)
-		global.Db.Raw(raw + " and contract.id = ?", param.Creator, param.Creator).Scan(&rows)
+		log.Println(param.Creator)
+		log.Println(param.Id)
+		global.Db.Raw(raw+" and contract.id = ?", param.Creator, param.Creator).Scan(&rows)
 	} else {
+		log.Printf("aaa")
 		if param.Status != NumberNull {
 			db.Joins(where+" and contract.status = ?", param.Creator, param.Status)
-			global.Db.Raw(raw + " and contract.status = ?", param.Creator, param.Status).Scan(&rows)
+			global.Db.Raw(raw+" and contract.status = ?", param.Creator, param.Status).Scan(&rows)
 		} else {
+			log.Println(param.Creator)
 			db.Joins(where, param.Creator)
 			global.Db.Raw(raw, param.Creator).Scan(&rows)
 		}
