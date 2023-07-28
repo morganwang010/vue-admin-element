@@ -115,7 +115,11 @@ const signIn = async () => {
       try {
         const res = await loginApi(formData)
         if (res) {
+          console.log(res.data.uid)
+          localStorage.setItem('uid', res.data.uid)
+          localStorage.setItem('token', res.data.token)
           wsCache.set(appStore.getUserInfo, res.data)
+          console.log('aaaa')
           // 是否使用动态路由
           if (appStore.getDynamicRouter) {
             getRole()
@@ -129,6 +133,7 @@ const signIn = async () => {
           }
         }
       } catch (error) {
+        console.log('bbbb')
         loading.value = false
       }
     }

@@ -1,10 +1,12 @@
 export type ContractTableData = {
   id: string
-  company: string
-  charger: string
-  mobilePhone: string
-  mount: number
-  startDate: string
-  endDate: string
-  pageviews: number
+  name: string
+  amount: number
+  beginTime: string
+  overTime: string
+  remarks: string
+  cname: string
+  status: number
+  created: string
+  updated: number
 }

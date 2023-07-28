@@ -26,6 +26,8 @@ const service: AxiosInstance = axios.create({
 // request拦截器
 service.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    config.headers['uid'] = localStorage.getItem('uid')
+    config.headers['token'] = localStorage.getItem('token')
     if (
       config.method === 'post' &&
       (config.headers as AxiosRequestHeaders)['Content-Type'] ===
@@ -65,7 +67,6 @@ service.interceptors.response.use(
       // 如果是文件流，直接过
       return response
     } else if (Number(response.data.code) === Number(result_code)) {
-      console.log('t33ttt333tt33')
       return response.data
     } else {
       ElMessage.error(response.data.message)

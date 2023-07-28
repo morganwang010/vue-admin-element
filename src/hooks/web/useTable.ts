@@ -8,18 +8,28 @@ import { TableSetPropsType } from '@/types/table'
 
 const { t } = useI18n()
 
+// interface TableResponse<T = any> {
+//   total: number
+//   list: T[]
+//   pageNumber: number
+//   pageSize: number
+// }
 interface TableResponse<T = any> {
-  total: number
+  code: number
+  message: string
+  data: string
   list: T[]
   pageNumber: number
   pageSize: number
 }
-
 interface UseTableConfig<T = any> {
   getListApi: (option: any) => Promise<IResponse<TableResponse<T>>>
   delListApi?: (option: any) => Promise<IResponse>
   // 返回数据格式配置
   response: {
+    code: number
+    message: string
+    data: string
     list: string
     total?: string
   }
@@ -127,10 +137,17 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
   const methods = {
     getList: async () => {
       tableObject.loading = true
+      console.log(unref(paramsObj))
+      console.log('rrrrrrrrrr')
       const res = await config?.getListApi(unref(paramsObj)).finally(() => {
         tableObject.loading = false
+        console.log('yyyyy')
       })
+      console.log(res)
+      console.log('0000000000000')
       if (res) {
+        console.log(res.data)
+        console.log('hereeeeeee')
         tableObject.tableList = get(res.data || {}, config?.response.list as string)
         tableObject.total = get(res.data || {}, config?.response?.total as string) || 0
       }

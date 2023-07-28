@@ -2,7 +2,7 @@
 import { ContentWrap } from '@/components/ContentWrap'
 import { useI18n } from '@/hooks/web/useI18n'
 import { Table } from '@/components/Table'
-import { getTableListApi } from '@/api/contract'
+import { getContractListApi } from '@/api/contract'
 import { ContractTableData } from '@/api/contract/types'
 import { ref, h, reactive, unref } from 'vue'
 import { ElTag, ElButton } from 'element-plus'
@@ -10,8 +10,10 @@ import { useTable } from '@/hooks/web/useTable'
 import { Pagination, TableColumn, TableSlotDefault } from '@/types/table'
 
 const { register, tableObject, methods, elTableRef } = useTable<ContractTableData>({
-  getListApi: getTableListApi,
+  getListApi: getContractListApi,
   response: {
+    message: 'message',
+    data: 'data',
     list: 'list',
     total: 'total'
   }
@@ -21,44 +23,44 @@ const { getList } = methods
 
 getList()
 
-const {
-  register: register2,
-  tableObject: tableObject2,
-  methods: methods2
-} = useTable<ContractTableData>({
-  getListApi: getTableListApi,
-  response: {
-    list: 'list',
-    total: 'total'
-  }
-})
+// const {
+//   register: register2,
+//   tableObject: tableObject2,
+//   methods: methods2
+// } = useTable<ContractTableData>({
+//   getListApi: getTableListApi,
+//   response: {
+//     list: 'list',
+//     total: 'total'
+//   }
+// })
 
-const { getList: getList2 } = methods2
+// const { getList: getList2 } = methods2
 
-getList2()
+// getList2()
 
 const { t } = useI18n()
 
 const columns = reactive<TableColumn[]>([
   {
-    field: 'index',
+    field: 'id',
     label: t('contactTable.index'),
     type: 'index'
   },
   {
-    field: 'title',
+    field: 'cname',
     label: t('contactTable.company')
   },
   {
-    field: 'author',
+    field: 'name',
     label: t('contactTable.focal')
   },
   {
-    field: 'display_time',
+    field: 'beginTime',
     label: t('contactTable.startDate')
   },
   {
-    field: 'display_time',
+    field: 'overTime',
     label: t('contactTable.endDate')
   },
   {
@@ -80,7 +82,7 @@ const columns = reactive<TableColumn[]>([
     }
   },
   {
-    field: 'pageviews',
+    field: 'amount',
     label: t('contactTable.mount')
   },
   {
@@ -92,7 +94,8 @@ const columns = reactive<TableColumn[]>([
 const actionFn = (data: TableSlotDefault) => {
   console.log(data)
 }
-
+console.log(tableObject.tableList)
+console.log('tttt')
 const paginationObj = ref<Pagination>()
 paginationObj.value = {
   total: tableObject.total

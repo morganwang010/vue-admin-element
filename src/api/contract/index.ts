@@ -1,7 +1,7 @@
 import request from '@/config/axios'
 import type { ContractTableData } from './types'
 
-export const getTableListApi = (params: any): Promise<IResponse> => {
+export const getContractListApi = (params: any): Promise<IResponse<ContractTableData>> => {
   return request.get({ url: '/contract/list', params })
 }
 

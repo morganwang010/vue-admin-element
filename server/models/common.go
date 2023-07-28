@@ -2,8 +2,8 @@ package models
 
 // 分页参数模型
 type Page struct {
-	PageNum  int `form:"pageNum"  json:"pageNum"`
-	PageSize int `form:"pageSize" json:"pageSize"`
+	PageIndex int `form:"pageIndex"  json:"pageIndex"`
+	PageSize  int `form:"pageSize" json:"pageSize"`
 }
 
 // 发送邮件参数模型

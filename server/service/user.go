@@ -91,17 +91,16 @@ func (u *UserService) Register(param *models.UserCreateParam) int {
 
 // 用户登录
 func (u *UserService) Login(param *models.UserLoginParam) (*models.UserInfo, int) {
- 
+
 	// 判断用户是否存在
 	if !u.userDao.IsExists(param.Username) {
 		return nil, response.ErrCodeUserNotExist
 	}
- 
 
 	// 获取用户信息
 	user, err := u.userDao.GetUser(param.Username)
 	if err != nil {
-		return nil, response.SuccessResultCode
+		return nil, response.ErrCodeSuccess
 	}
 
 	// 校验账号密码
@@ -131,7 +130,7 @@ func (u *UserService) Login(param *models.UserLoginParam) (*models.UserInfo, int
 		Creator: userInfo.Uid,
 	})
 
-	return &userInfo, response.SuccessResultCode
+	return &userInfo, response.ErrCodeSuccess
 }
 
 // 获取验证码

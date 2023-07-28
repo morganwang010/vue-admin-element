@@ -59,7 +59,7 @@ func (c *ContractDao) GetList(param *models.ContractQueryParam) ([]*models.Contr
 	raw := "select count(*) from contract where creator = ?"
 
 	// 分页查询
-	offset := (param.Page.PageNum - 1) * param.Page.PageSize
+	offset := (param.Page.PageIndex - 1) * param.Page.PageSize
 	db := global.Db.Offset(offset).Limit(param.Page.PageSize).Table(CONTRACT).Select(field)
 
 	var rows int64

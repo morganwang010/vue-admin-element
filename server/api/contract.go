@@ -62,7 +62,7 @@ func (c *ContractApi) GetList(context *gin.Context) {
 	var param models.ContractQueryParam
 	uid, _ := strconv.Atoi(context.Request.Header.Get("uid"))
 	err := context.ShouldBind(&param)
-	if uid <= 0 || err != nil || param.Page.PageNum <= 0 || param.Page.PageSize <= 0 {
+	if uid <= 0 || err != nil || param.Page.PageIndex <= 0 || param.Page.PageSize <= 0 {
 		response.Result(response.ErrCodeParamInvalid, nil, context)
 		return
 	}

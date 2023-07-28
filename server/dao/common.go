@@ -42,8 +42,8 @@ var ctx = context.Background()
 // dest  查询结果绑定的结构体,
 // bind  绑定表结构对应的结构体
 func restPage(page models.Page, name string, query interface{}, dest interface{}, bind interface{}) (int64, error) {
-	if page.PageNum > 0 && page.PageSize > 0 {
-		offset := (page.PageNum - 1) * page.PageSize
+	if page.PageIndex > 0 && page.PageSize > 0 {
+		offset := (page.PageIndex - 1) * page.PageSize
 		global.Db.Offset(offset).Limit(page.PageSize).Table(name).Where(query).Find(dest)
 	}
 	res := global.Db.Table(name).Where(query).Find(bind)
