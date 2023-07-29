@@ -8,6 +8,7 @@ import { ref, h, reactive, unref } from 'vue'
 import { ElTag, ElButton } from 'element-plus'
 import { useTable } from '@/hooks/web/useTable'
 import { Pagination, TableColumn, TableSlotDefault } from '@/types/table'
+import dayjs from 'dayjs'
 
 const { register, tableObject, methods, elTableRef, paginationObj } = useTable<ContractTableData>({
   getListApi: getContractListApi,
@@ -45,11 +46,21 @@ const columns = reactive<TableColumn[]>([
   },
   {
     field: 'beginTime',
-    label: t('contractTable.startDate')
+    label: t('contractTable.startDate'),
+    formatter: (_: Recordable, __: TableColumn, cellValue: string) => {
+      return h(() =>
+        cellValue === '' ? t('contractTable.null') : dayjs(cellValue).format('YYYY-MM-DD')
+      )
+    }
   },
   {
     field: 'overTime',
-    label: t('contractTable.endDate')
+    label: t('contractTable.endDate'),
+    formatter: (_: Recordable, __: TableColumn, cellValue: string) => {
+      return h(() =>
+        cellValue === '' ? t('contractTable.null') : dayjs(cellValue).format('YYYY-MM-DD')
+      )
+    }
   },
   {
     field: 'remarks',

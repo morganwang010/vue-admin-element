@@ -445,7 +445,8 @@ export default {
     delete: '删除',
     lock: '锁定',
     remarks: '备注',
-    phone: '電話'
+    phone: '電話',
+    null: '未填寫'
   },
   customerTable: {
     table: '表格',
@@ -480,7 +481,8 @@ export default {
     lock: '锁定',
     remarks: '备注',
     phone: '電話',
-    domain: '域名'
+    domain: '域名',
+    null: '未填寫'
   },
   richText: {
     richText: '富文本',
