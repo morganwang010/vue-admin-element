@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import { ContentWrap } from '@/components/ContentWrap'
+import { Dialog } from '@/components/Dialog'
 import { useI18n } from '@/hooks/web/useI18n'
 import { Table } from '@/components/Table'
 import { getContractListApi } from '@/api/contract'
+import { getDictOneApi } from '@/api/common'
 import { ContractTableData } from '@/api/contract/types'
 import { ref, h, reactive, unref } from 'vue'
 import { ElTag, ElButton } from 'element-plus'
 import { useTable } from '@/hooks/web/useTable'
-import { Pagination, TableColumn, TableSlotDefault } from '@/types/table'
-import dayjs from 'dayjs'
+import { TableColumn, TableSlotDefault } from '@/types/table'
+import { Form, FormExpose } from '@/components/Form'
+import { FormSchema } from '@/types/form'
+import { useValidator } from '@/hooks/web/useValidator'
 
+import dayjs from 'dayjs'
+const { required } = useValidator()
 const { register, tableObject, methods, elTableRef, paginationObj } = useTable<ContractTableData>({
   getListApi: getContractListApi,
   response: {
@@ -19,7 +25,21 @@ const { register, tableObject, methods, elTableRef, paginationObj } = useTable<C
     total: 'total'
   }
 })
+const dialogVisible2 = ref(false)
 
+const formRef = ref<FormExpose>()
+
+const formSubmit = () => {
+  unref(formRef)
+    ?.getElFormRef()
+    ?.validate((valid) => {
+      if (valid) {
+        console.log('submit success')
+      } else {
+        console.log('submit fail')
+      }
+    })
+}
 const { getList } = methods
 
 getList()
@@ -94,17 +114,97 @@ const columns = reactive<TableColumn[]>([
   }
 ])
 
+const schema = reactive<FormSchema[]>([
+  {
+    field: 'field1',
+    label: t('formDemo.input'),
+    component: 'Input',
+    formItemProps: {
+      rules: [required()]
+    }
+  },
+  {
+    field: 'field2',
+    label: t('formDemo.select'),
+    component: 'Select',
+    componentProps: {
+      options: [
+        {
+          label: 'option1',
+          value: '1'
+        },
+        {
+          label: 'option2',
+          value: '2'
+        }
+      ]
+    }
+  },
+  {
+    field: 'field3',
+    label: t('formDemo.radio'),
+    component: 'Radio',
+    componentProps: {
+      options: [
+        {
+          label: 'option-1',
+          value: '1'
+        },
+        {
+          label: 'option-2',
+          value: '2'
+        }
+      ]
+    }
+  },
+  {
+    field: 'field4',
+    label: t('formDemo.checkbox'),
+    component: 'Checkbox',
+    value: [],
+    componentProps: {
+      options: [
+        {
+          label: 'option-1',
+          value: '1'
+        },
+        {
+          label: 'option-2',
+          value: '2'
+        },
+        {
+          label: 'option-3',
+          value: '3'
+        }
+      ]
+    }
+  },
+  {
+    field: 'field5',
+    component: 'DatePicker',
+    label: t('formDemo.datePicker'),
+    componentProps: {
+      type: 'date'
+    }
+  },
+  {
+    field: 'field6',
+    component: 'TimeSelect',
+    label: t('formDemo.timeSelect')
+  }
+])
+const getDictOne = async () => {
+  const res = await getDictOneApi()
+  if (res) {
+    schema[1].componentProps!.options = res.data
+  }
+}
 const actionFn = (data: TableSlotDefault) => {
+  // schema[1].componentProps!.options = data
   console.log(data)
 }
 
-// const paginationObj = ref<Pagination>()
-
-// paginationObj.value = {
-//   total: tableObject.total
-// }
-console.log(tableObject)
-console.log(tableObject.total)
+// getDictOne()
 </script>
 
 <template>
@@ -119,8 +219,14 @@ console.log(tableObject.total)
       @register="register"
     >
       <template #action="data">
+        <ElButton type="primary" v-hasPermi="['example:dialog:edit']" @click="action(row, 'edit')">
+          {{ t('exampleDemo.edit') }}
+        </ElButton>
         <ElButton type="primary" @click="actionFn(data as TableSlotDefault)">
-          {{ t('contactTable.edit') }}
+          {{ t('contractTable.edit') }}
+        </ElButton>
+        <ElButton type="primary" @click="dialogVisible2 = !dialogVisible2">
+          {{ t('dialogDemo.combineWithForm') }}
         </ElButton>
         <Icon
           @click="actionFn(data as TableSlotDefault)"
@@ -139,5 +245,13 @@ console.log(tableObject.total)
         </div>
       </template>
     </Table>
+
+    <Dialog v-model="dialogVisible2" :title="t('dialogDemo.dialog')">
+      <Form ref="formRef" :schema="schema" />
+      <template #footer>
+        <ElButton type="primary" @click="formSubmit">{{ t('dialogDemo.submit') }}</ElButton>
+        <ElButton @click="dialogVisible2 = false">{{ t('dialogDemo.close') }}</ElButton>
+      </template>
+    </Dialog>
   </ContentWrap>
 </template>

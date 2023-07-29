@@ -8,7 +8,7 @@ import { ref, h, reactive, unref } from 'vue'
 import { ElTag, ElButton } from 'element-plus'
 import { useTable } from '@/hooks/web/useTable'
 import { Pagination, TableColumn, TableSlotDefault } from '@/types/table'
-
+import dayjs from 'dayjs'
 const { register, tableObject, methods, elTableRef, paginationObj } = useTable<ContractTableData>({
   getListApi: getCustomerListApi,
   response: {
@@ -45,7 +45,12 @@ const columns = reactive<TableColumn[]>([
   },
   {
     field: 'created',
-    label: t('customerTable.startDate')
+    label: t('customerTable.startDate'),
+    formatter: (_: Recordable, __: TableColumn, cellValue: string) => {
+      return h(() =>
+        cellValue === '' ? t('customerTable.null') : dayjs(cellValue).format('YYYY-MM-DD')
+      )
+    }
   },
   {
     field: 'overTime',
@@ -87,11 +92,6 @@ const actionFn = (data: TableSlotDefault) => {
   console.log(data)
 }
 
-// const paginationObj = ref<Pagination>()
-
-// paginationObj.value = {
-//   total: tableObject.total
-// }
 console.log(tableObject)
 console.log(tableObject.total)
 </script>

@@ -129,7 +129,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     children: [
       {
         path: 'index',
-        component: () => import('@/views/Contract/Contract.vue'),
+        component: () => import('@/views/Contract/Contract1.vue'),
         name: 'Contract',
         meta: {
           title: t('router.contract'),

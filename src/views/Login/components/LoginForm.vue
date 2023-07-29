@@ -115,10 +115,23 @@ const signIn = async () => {
       try {
         const res = await loginApi(formData)
         if (res) {
-          console.log(res.data.uid)
+          // console.log(res.data.uid)
           localStorage.setItem('uid', res.data.uid)
           localStorage.setItem('token', res.data.token)
-          wsCache.set(appStore.getUserInfo, res.data)
+          // const userInfo = { permissions: res.data.permissions }
+          // const permissions[0] =  res.data.permissions
+          // console.log(appStore.getUserInfo + 'hhhhhhhhhhh')
+          // console.log(JSON.stringify(userInfo))
+          let permissions = []
+          permissions.push(String(res.data.permissions.toString()))
+          // console.log(permissions)
+          // wsCache.set('test', '999999999999')
+          // console.log(wsCache.get('test'))
+          // wsCache.set(appStore.getUserInfo, 'hhhhhhhhhhhhh111111111')
+          // console.log(wsCache.get(appStore.getUserInfo))
+
+          wsCache.set(appStore.getUserInfo, permissions)
+          console.log(wsCache.get(appStore.getUserInfo))
           console.log('aaaa')
           // 是否使用动态路由
           if (appStore.getDynamicRouter) {

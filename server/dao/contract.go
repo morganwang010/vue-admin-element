@@ -42,7 +42,7 @@ func (c *ContractDao) Update(param *models.ContractUpdateParam) error {
 		Cid:         param.Cid,
 		Productlist: param.Productlist,
 		Status:      param.Status,
-		Updated:     time.Now().Unix(),
+		Updated:     time.Now(),
 	}
 	db := global.Db.Model(&contract).Select("*").Omit("id", "creator", "created")
 	return db.Updates(&contract).Error
@@ -65,11 +65,8 @@ func (c *ContractDao) GetList(param *models.ContractQueryParam) ([]*models.Contr
 	var rows int64
 	if param.Id != NumberNull {
 		db.Joins(where+" and contract.id = ?", param.Creator, param.Id)
-		log.Println(param.Creator)
-		log.Println(param.Id)
 		global.Db.Raw(raw+" and contract.id = ?", param.Creator, param.Creator).Scan(&rows)
 	} else {
-		log.Printf("aaa")
 		if param.Status != NumberNull {
 			db.Joins(where+" and contract.status = ?", param.Creator, param.Status)
 			global.Db.Raw(raw+" and contract.status = ?", param.Creator, param.Status).Scan(&rows)

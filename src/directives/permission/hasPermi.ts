@@ -12,7 +12,8 @@ const appStore = useAppStoreWithOut()
 // 全部权限
 const all_permission = ['*.*.*']
 const hasPermission = (value: string | string[]): boolean => {
-  const permissions = wsCache.get(appStore.getUserInfo).permissions as string[]
+  const permissions = wsCache.get(appStore.getUserInfo) as string[]
+
   if (!value) {
     throw new Error(t('permission.hasPermission'))
   }
