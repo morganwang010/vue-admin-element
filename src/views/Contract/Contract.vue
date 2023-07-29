@@ -9,7 +9,7 @@ import { ElTag, ElButton } from 'element-plus'
 import { useTable } from '@/hooks/web/useTable'
 import { Pagination, TableColumn, TableSlotDefault } from '@/types/table'
 
-const { register, tableObject, methods, elTableRef } = useTable<ContractTableData>({
+const { register, tableObject, methods, elTableRef, paginationObj } = useTable<ContractTableData>({
   getListApi: getContractListApi,
   response: {
     message: 'message',
@@ -22,22 +22,6 @@ const { register, tableObject, methods, elTableRef } = useTable<ContractTableDat
 const { getList } = methods
 
 getList()
-
-// const {
-//   register: register2,
-//   tableObject: tableObject2,
-//   methods: methods2
-// } = useTable<ContractTableData>({
-//   getListApi: getTableListApi,
-//   response: {
-//     list: 'list',
-//     total: 'total'
-//   }
-// })
-
-// const { getList: getList2 } = methods2
-
-// getList2()
 
 const { t } = useI18n()
 
@@ -94,12 +78,14 @@ const columns = reactive<TableColumn[]>([
 const actionFn = (data: TableSlotDefault) => {
   console.log(data)
 }
-console.log(tableObject.tableList)
-console.log('tttt')
-const paginationObj = ref<Pagination>()
-paginationObj.value = {
-  total: tableObject.total
-}
+
+// const paginationObj = ref<Pagination>()
+
+// paginationObj.value = {
+//   total: tableObject.total
+// }
+console.log(tableObject)
+console.log(tableObject.total)
 </script>
 
 <template>

@@ -4,7 +4,7 @@ import { ref, reactive, watch, computed, unref, nextTick } from 'vue'
 import { get } from 'lodash-es'
 import type { TableProps } from '@/components/Table/src/types'
 import { useI18n } from '@/hooks/web/useI18n'
-import { TableSetPropsType } from '@/types/table'
+import { Pagination, TableSetPropsType } from '@/types/table'
 
 const { t } = useI18n()
 
@@ -31,7 +31,7 @@ interface UseTableConfig<T = any> {
     message: string
     data: string
     list: string
-    total?: string
+    total?: number
   }
   // 默认传递的参数
   defaultParams?: Recordable
@@ -67,6 +67,7 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
     // 当前行的数据
     currentRow: null
   })
+  const paginationObj = ref<Pagination>()
 
   const paramsObj = computed(() => {
     return {
@@ -137,19 +138,15 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
   const methods = {
     getList: async () => {
       tableObject.loading = true
-      console.log(unref(paramsObj))
-      console.log('rrrrrrrrrr')
       const res = await config?.getListApi(unref(paramsObj)).finally(() => {
         tableObject.loading = false
-        console.log('yyyyy')
       })
-      console.log(res)
-      console.log('0000000000000')
       if (res) {
-        console.log(res.data)
-        console.log('hereeeeeee')
         tableObject.tableList = get(res.data || {}, config?.response.list as string)
-        tableObject.total = get(res.data || {}, config?.response?.total as string) || 0
+        tableObject.total = get(res.data || {}, config?.response?.total as number) || 0
+        paginationObj.value = {
+          total: tableObject.total
+        }
       }
     },
     setProps: async (props: TableProps = {}) => {
@@ -208,6 +205,7 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
     register,
     elTableRef,
     tableObject,
-    methods
+    methods,
+    paginationObj
   }
 }
