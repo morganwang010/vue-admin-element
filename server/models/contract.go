@@ -60,6 +60,8 @@ type ContractQueryParam struct {
 type ContractList struct {
 	Id        int64   `json:"id"`
 	Name      string  `json:"name"`
+	Contact      string  `json:"contact"`
+	Mobilephone      string  `json:"mobilephone"`
 	Amount    float64 `json:"amount"`
 	BeginTime string  `json:"beginTime"`
 	OverTime  string  `json:"overTime"`

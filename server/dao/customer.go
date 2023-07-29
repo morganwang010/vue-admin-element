@@ -17,7 +17,7 @@ func (c *CustomerDao) Create(param *models.CustomerCreateParam) error {
 	customer := models.Customer{
 		Name:     param.Name,
 		Source:   param.Source,
-		Phone:    param.Phone,
+		Mobilephone:    param.Phone,
 		Email:    param.Email,
 		Industry: param.Industry,
 		Level:    param.Level,
@@ -26,7 +26,7 @@ func (c *CustomerDao) Create(param *models.CustomerCreateParam) error {
 		Address:  param.Address,
 		Status:   1,
 		Creator:  param.Creator,
-		Created:  time.Now().Unix(),
+		Created:  time.Now(),
 	}
 	return global.Db.Create(&customer).Error
 }
@@ -36,7 +36,7 @@ func (c *CustomerDao) Update(param *models.CustomerUpdateParam) error {
 		Id:       param.Id,
 		Name:     param.Name,
 		Source:   param.Source,
-		Phone:    param.Phone,
+		Mobilephone:    param.Phone,
 		Email:    param.Email,
 		Industry: param.Industry,
 		Level:    param.Level,
@@ -44,7 +44,7 @@ func (c *CustomerDao) Update(param *models.CustomerUpdateParam) error {
 		Region:   param.Region,
 		Address:  param.Address,
 		Status:   param.Status,
-		Updated:  time.Now().Unix(),
+		Updated:  time.Now(),
 	}
 	db := global.Db.Model(&customer).Select("*").Omit("id", "creator", "created")
 	return db.Updates(&customer).Error

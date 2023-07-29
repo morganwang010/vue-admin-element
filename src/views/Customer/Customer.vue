@@ -2,7 +2,7 @@
 import { ContentWrap } from '@/components/ContentWrap'
 import { useI18n } from '@/hooks/web/useI18n'
 import { Table } from '@/components/Table'
-import { getContractListApi } from '@/api/contract'
+import { getCustomerListApi } from '@/api/customer'
 import { ContractTableData } from '@/api/contract/types'
 import { ref, h, reactive, unref } from 'vue'
 import { ElTag, ElButton } from 'element-plus'
@@ -10,7 +10,7 @@ import { useTable } from '@/hooks/web/useTable'
 import { Pagination, TableColumn, TableSlotDefault } from '@/types/table'
 
 const { register, tableObject, methods, elTableRef, paginationObj } = useTable<ContractTableData>({
-  getListApi: getContractListApi,
+  getListApi: getCustomerListApi,
   response: {
     message: 'message',
     data: 'data',
@@ -28,32 +28,32 @@ const { t } = useI18n()
 const columns = reactive<TableColumn[]>([
   {
     field: 'id',
-    label: t('contractTable.index'),
+    label: t('customerTable.index'),
     type: 'index'
   },
   {
-    field: 'cname',
-    label: t('contractTable.company')
+    field: 'name',
+    label: t('customerTable.company')
   },
   {
     field: 'contact',
-    label: t('contractTable.focal')
+    label: t('customerTable.focal')
   },
   {
     field: 'mobilephone',
-    label: t('contractTable.phone')
+    label: t('customerTable.phone')
   },
   {
-    field: 'beginTime',
-    label: t('contractTable.startDate')
+    field: 'created',
+    label: t('customerTable.startDate')
   },
   {
     field: 'overTime',
-    label: t('contractTable.endDate')
+    label: t('customerTable.endDate')
   },
   {
-    field: 'remarks',
-    label: t('contractTable.remarks')
+    field: 'domain',
+    label: t('customerTable.domain')
   },
   {
     field: 'importance',

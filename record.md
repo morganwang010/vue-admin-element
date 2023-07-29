@@ -1,6 +1,9 @@
-###0728
-开始调contract接口，在vue中拼接参数
-为了让github上的contribution生效，修改本地邮箱
+### 0729
+- 修復分頁功能，將分頁總數的數據在table頁麪獲取
+
+### 0728
+- 开始调contract接口，在vue中拼接参数
+- 为了让github上的contribution生效，修改本地邮箱
 
 从第三方式复制过来的vue，样式有问题，需要通过prettier进行下格式化，命令如下：
 npx prettier --write "src/**/*.js" "src/**/*.vue"

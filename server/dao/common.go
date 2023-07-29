@@ -3,7 +3,7 @@ package dao
 import (
 	"context"
 	"io"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"mime/multipart"
 	"os"
 	"path"
@@ -46,6 +46,7 @@ func restPage(page models.Page, name string, query interface{}, dest interface{}
 		offset := (page.PageIndex - 1) * page.PageSize
 		global.Db.Offset(offset).Limit(page.PageSize).Table(name).Where(query).Find(dest)
 	}
+	log.Printf("ccccccccccc")
 	res := global.Db.Table(name).Where(query).Find(bind)
 	return res.RowsAffected, res.Error
 }

@@ -54,7 +54,7 @@ func (c *ContractDao) Delete(param *models.ContractDeleteParam) error {
 
 func (c *ContractDao) GetList(param *models.ContractQueryParam) ([]*models.ContractList, int64, error) {
 	contractList := make([]*models.ContractList, 0)
-	field := "contract.id, contract.name, contract.amount, contract.begin_time, contract.over_time, customer.name as cname, contract.remarks, contract.status, contract.created, contract.updated"
+	field := "contract.id, contract.name, contract.amount, contract.begin_time, contract.over_time, customer.name as cname, customer.contact as contact, customer.mobilephone as mobilephone,contract.remarks, contract.status, contract.created, contract.updated"
 	where := "inner join customer on contract.cid = customer.id and contract.creator = ?"
 	raw := "select count(*) from contract where creator = ?"
 

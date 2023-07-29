@@ -1,10 +1,12 @@
 package models
-
+import (
+	"time"
+)
 type Customer struct {
 	Id       int64  `gorm:"primaryKey"`
 	Name     string `gorm:"name"`
 	Source   string `gorm:"source"`
-	Phone    string `gorm:"phone"`
+	Mobilephone    string `gorm:"mobilephone"`
 	Email    string `gorm:"email"`
 	Industry string `gorm:"industry"`
 	Level    string `gorm:"level"`
@@ -13,8 +15,11 @@ type Customer struct {
 	Address  string `gorm:"address"`
 	Status   int    `gorm:"status"`
 	Creator  int64  `gorm:"creator"`
-	Created  int64  `gorm:"created"`
-	Updated  int64  `gorm:"updated"`
+	Created  time.Time  `gorm:"created"`
+	Updated  time.Time  `gorm:"updated"`
+	Domain   string `gorm:"domain"`
+	Contact   string `gorm:"contact"`
+
 }
 
 type CustomerCreateParam struct {
@@ -72,7 +77,7 @@ type CustomerList struct {
 	Id       int64  `json:"id"`
 	Name     string `json:"name"`
 	Source   string `json:"source"`
-	Phone    string `json:"phone"`
+	Mobilephone    string `json:"mobilephone"`
 	Email    string `json:"email"`
 	Industry string `json:"industry"`
 	Level    string `json:"level"`
@@ -80,15 +85,17 @@ type CustomerList struct {
 	Region   string `json:"region"`
 	Address  string `json:"address"`
 	Status   int    `json:"status"`
-	Created  int64  `json:"created"`
-	Updated  int64  `json:"updated"`
+	Created  time.Time  `json:"created"`
+	Updated  time.Time  `json:"updated"`
+	Domain   string `json:"domain"`
+	Contact   string `json:"contact"`
 }
 
 type CustomerInfo struct {
 	Id       int64  `json:"id"`
 	Name     string `json:"name"`
 	Source   string `json:"source"`
-	Phone    string `json:"phone"`
+	Mobilephone    string `json:"mobilephone"`
 	Email    string `json:"email"`
 	Industry string `json:"industry"`
 	Level    string `json:"level"`
@@ -106,7 +113,7 @@ type CustomerOption struct {
 type CustomerExcelRow struct {
 	Name     string `json:"name"`
 	Source   string `json:"source"`
-	Phone    string `json:"phone"`
+	Mobilephone    string `json:"mobilephone"`
 	Email    string `json:"email"`
 	Industry string `json:"industry"`
 	Level    string `json:"level"`

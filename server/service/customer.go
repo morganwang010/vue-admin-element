@@ -6,7 +6,6 @@ import (
 	"vue-admin-element/models"
 	"vue-admin-element/response"
 	"strconv"
-	"time"
 )
 
 const (
@@ -116,7 +115,7 @@ func (c *CustomerService) Export(uid int64) (string, int) {
 	for _, c := range customers {
 		row.Name = c.Name
 		row.Source = c.Source
-		row.Phone = c.Phone
+		row.Mobilephone = c.Mobilephone
 		row.Email = c.Email
 		row.Industry = c.Industry
 		row.Level = c.Level
@@ -129,9 +128,10 @@ func (c *CustomerService) Export(uid int64) (string, int) {
 		if c.Status == 2 {
 			row.Status = "未签约"
 		}
-		row.Created = time.Unix(c.Created, 0).Format("2006-01-02")
-		if c.Updated != 0 {
-			row.Updated = time.Unix(c.Updated, 0).Format("2006-01-02")
+		// row.Created = time(c.Created, 0).Format("2006-01-02")
+		row.Created = c.Created.Format("2006-01-02")
+		if !c.Updated.IsZero() {
+			row.Created = c.Created.Format("2006-01-02")
 		}
 		excelRows = append(excelRows, row)
 	}

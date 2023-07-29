@@ -3,6 +3,7 @@ package api
 import(
 	"vue-admin-element/service"
 	"github.com/gin-gonic/gin"
+	"vue-admin-element/response"
 
 )
 
@@ -21,5 +22,5 @@ func NewDictApi() *DictApi {
 
 func (u *DictApi) GetList(context *gin.Context) {
 	 
-    return  
+    response.Result(response.ErrCodeSuccess, nil, context)
 	}
