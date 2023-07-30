@@ -276,16 +276,5 @@ const save = async () => {
       <ElButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</ElButton>
     </template>
 
-    <template #image="{ row, index }">
-      <ElImage
-        preview-teleported
-        loading="lazy"
-        :src="row.image"
-        :preview-src-list="tableDataImage.map((v) => v.image)"
-        :initial-index="index"
-        fit="cover"
-        class="w-[100px] h-[100px]"
-      />
-    </template>
   </Dialog>
 </template>

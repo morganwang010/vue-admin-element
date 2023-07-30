@@ -1,3 +1,5 @@
+### 0731
+- 使用gitemoji ,先安装 npm i -g gitmoji-cli， 
 ### 0730
 - 添加product页面
 - 完成表格编辑功能
