@@ -5,7 +5,7 @@ import (
 	"vue-admin-element/response"
 	"vue-admin-element/service"
 	"strconv"
-
+	log "github.com/sirupsen/logrus"
 	"github.com/gin-gonic/gin"
 )
 
@@ -63,9 +63,11 @@ func (p *ProductApi) GetList(context *gin.Context) {
 	err := context.ShouldBind(&param)
 	if uid <= 0 || err != nil {
 		response.Result(response.ErrCodeParamInvalid, nil, context)
+		log.Println(err)
 		return
 	}
 	param.Creator = int64(uid)
+	log.Println(param.Creator)
 	productList, rows, errCode := p.productService.GetList(&param)
 	response.PageResult(errCode, productList, rows, context)
 }

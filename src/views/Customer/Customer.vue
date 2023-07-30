@@ -79,7 +79,7 @@ const crudSchemas = reactive<CrudSchema[]>([
   },
   {
     field: 'latestsign',
-    label: t('customerTable.endDate'),
+    label: t('customerTable.latestsign'),
     formatter: (_: Recordable, __: TableColumn, cellValue: string) => {
       return h(() =>
         cellValue === '' ? t('customerTable.null') : dayjs(cellValue).format('YYYY-MM-DD')

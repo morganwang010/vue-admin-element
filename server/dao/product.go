@@ -23,7 +23,7 @@ func (p *ProductDao) Create(param *models.ProductCreateParam) error {
 		Description: param.Description,
 		Status:      param.Status,
 		Creator:     param.Creator,
-		Created:     time.Now().Unix(),
+		Created:     time.Now(),
 	}
 	return global.Db.Create(&product).Error
 }
@@ -38,7 +38,7 @@ func (p *ProductDao) Update(param *models.ProductUpdateParam) error {
 		Price:       param.Price,
 		Description: param.Description,
 		Status:      param.Status,
-		Updated:     time.Now().Unix(),
+		Updated:     time.Now(),
 	}
 	db := global.Db.Model(&product).Select("*").Omit("id", "creator", "created")
 	return db.Updates(&product).Error

@@ -5,9 +5,9 @@ import { Dialog } from '@/components/Dialog'
 import { useI18n } from '@/hooks/web/useI18n'
 import { ElButton, ElTag, ElImage } from 'element-plus'
 import { Table } from '@/components/Table'
-import { getContractListApi, updateContractApi, createContractApi } from '@/api/contract'
+import { getProductListApi, updateProductApi, createProductApi } from '@/api/product'
 import { useTable } from '@/hooks/web/useTable'
-import { ContractTableData } from '@/api/contract/types'
+import { ProductTableData } from '@/api/product/types'
 import { h, ref, unref, reactive } from 'vue'
 import Write from './components/Write.vue'
 import Detail from './components/Detail.vue'
@@ -15,8 +15,8 @@ import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas'
 import { TableColumn } from '@/types/table'
 import dayjs from 'dayjs'
 
-const { register, tableObject, methods, elTableRef, paginationObj } = useTable<ContractTableData>({
-  getListApi: getContractListApi,
+const { register, tableObject, methods, elTableRef, paginationObj } = useTable<ProductTableData>({
+  getListApi: getProductListApi,
   response: {
     message: 'message',
     data: 'data',
@@ -45,42 +45,46 @@ const { t } = useI18n()
 const crudSchemas = reactive<CrudSchema[]>([
   {
     field: 'id',
-    label: t('contractTable.index'),
+    label: t('productTable.index'),
     type: 'index'
   },
   {
-    field: 'cname',
-    label: t('contractTable.company')
+    field: 'name',
+    label: t('productTable.name')
   },
   {
-    field: 'contact',
-    label: t('contractTable.focal')
+    field: 'unit',
+    label: t('productTable.unit')
   },
   {
-    field: 'mobilephone',
-    label: t('contractTable.phone')
+    field: 'price',
+    label: t('productTable.price')
   },
   {
-    field: 'beginTime',
-    label: t('contractTable.startDate'),
+    field: 'description',
+    label: t('productTable.describe')
+  },
+  {
+    field: 'image',
+    label: t('productTable.image')
+  },
+  {
+    field: 'created',
+    label: t('productTable.createdDate'),
     formatter: (_: Recordable, __: TableColumn, cellValue: string) => {
       return h(() =>
-        cellValue === '' ? t('contractTable.null') : dayjs(cellValue).format('YYYY-MM-DD')
+        cellValue === '' ? t('productTable.null') : dayjs(cellValue).format('YYYY-MM-DD')
       )
     }
   },
   {
-    field: 'overTime',
-    label: t('contractTable.endDate'),
+    field: 'offdate',
+    label: t('productTable.offDate'),
     formatter: (_: Recordable, __: TableColumn, cellValue: string) => {
       return h(() =>
-        cellValue === '' ? t('contractTable.null') : dayjs(cellValue).format('YYYY-MM-DD')
+        cellValue === '' ? t('productTable.null') : dayjs(cellValue).format('YYYY-MM-DD')
       )
     }
-  },
-  {
-    field: 'remarks',
-    label: t('contractTable.remarks')
   },
   {
     field: 'importance',
@@ -99,10 +103,6 @@ const crudSchemas = reactive<CrudSchema[]>([
             : t('tableDemo.commonly')
       )
     }
-  },
-  {
-    field: 'amount',
-    label: t('contactTable.mount')
   },
   {
     field: 'action',
@@ -125,7 +125,7 @@ const AddAction = () => {
 
 const delLoading = ref(false)
 
-const delData = async (row: ContractTableData | null, multiple: boolean) => {
+const delData = async (row: ProductTableData | null, multiple: boolean) => {
   tableObject.currentRow = row
   const { delList, getSelections } = methods
   const selections = await getSelections()
@@ -140,7 +140,7 @@ const delData = async (row: ContractTableData | null, multiple: boolean) => {
 
 const actionType = ref('')
 
-const action = (row: ContractTableData, type: string) => {
+const action = (row: ProductTableData, type: string) => {
   dialogTitle.value = t(type === 'edit' ? 'exampleDemo.edit' : 'exampleDemo.detail')
   actionType.value = type
   tableObject.currentRow = row
@@ -156,55 +156,26 @@ const save = async () => {
   await write?.elFormRef?.validate(async (isValid) => {
     if (isValid) {
       loading.value = true
-      const data = (await write?.getFormData()) as ContractTableData
+      const data = (await write?.getFormData()) as ProductTableData
       console.log(actionType.value)
+      let apiMethod
 
       if (actionType.value === 'edit') {
-        const params = {
-          id: data.id,
-          name: data.name,
-          amount: data.amount,
-          beginTime: data.beginTime,
-          overTime: data.overTime,
-          remarks: data.remarks,
-          cname: data.cname,
-          status: data.status,
-          cid: '77',
-          productList: 'fff'
-        }
-        const res = await updateContractApi(data)
-          .catch(() => {})
-          .finally(() => {
-            loading.value = false
-          })
-        if (res) {
-          dialogVisible.value = false
-          tableObject.currentPage = 1
-          getList()
-        }
+        apiMethod = updateProductApi
       } else {
-        const res = await createContractApi(data)
-          .catch(() => {})
-          .finally(() => {
-            loading.value = false
-          })
-        if (res) {
-          dialogVisible.value = false
-          tableObject.currentPage = 1
-          getList()
-        }
+        apiMethod = createProductApi
       }
 
-      // const res = await apiMethod(data)
-      //   .catch(() => {})
-      //   .finally(() => {
-      //     loading.value = false
-      //   })
-      // if (res) {
-      //   dialogVisible.value = false
-      //   tableObject.currentPage = 1
-      //   getList()
-      // }
+      const res = await apiMethod(data)
+        .catch(() => {})
+        .finally(() => {
+          loading.value = false
+        })
+      if (res) {
+        dialogVisible.value = false
+        tableObject.currentPage = 1
+        getList()
+      }
     }
   })
 }
@@ -252,6 +223,10 @@ const save = async () => {
           {{ t('exampleDemo.del') }}
         </ElButton>
       </template>
+
+      <template #image="{ row }">
+        <ElImage :src="row.image" />
+      </template>
     </Table>
   </ContentWrap>
 
@@ -274,18 +249,6 @@ const save = async () => {
         {{ t('exampleDemo.save') }}
       </ElButton>
       <ElButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</ElButton>
-    </template>
-
-    <template #image="{ row, index }">
-      <ElImage
-        preview-teleported
-        loading="lazy"
-        :src="row.image"
-        :preview-src-list="tableDataImage.map((v) => v.image)"
-        :initial-index="index"
-        fit="cover"
-        class="w-[100px] h-[100px]"
-      />
     </template>
   </Dialog>
 </template>

@@ -6,7 +6,6 @@ import (
 	"vue-admin-element/models"
 	"vue-admin-element/response"
 	"strconv"
-	"time"
 )
 
 type ProductService struct {
@@ -87,9 +86,9 @@ func (p *ProductService) Export(uid int64) (string, int) {
 		row.Code = p.Code
 		row.Price = p.Price
 		row.Description = p.Description
-		row.Created = time.Unix(p.Created, 0).Format("2006-01-02")
-		if p.Updated != 0 {
-			row.Updated = time.Unix(p.Updated, 0).Format("2006-01-02")
+		row.Created = p.Created.Format("2006-01-02")
+		if !p.Updated.IsZero(){
+			row.Updated = p.Updated.Format("2006-01-02")
 		}
 		excelRows = append(excelRows, row)
 	}

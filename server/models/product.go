@@ -1,5 +1,7 @@
 package models
-
+import (
+	"time"
+)
 type Product struct {
 	Id          int64   `gorm:"primaryKey"`
 	Name        string  `gorm:"name"`
@@ -10,8 +12,10 @@ type Product struct {
 	Description string  `gorm:"description"`
 	Status      int     `gorm:"status"`
 	Creator     int64   `gorm:"creator"`
-	Created     int64   `gorm:"created"`
-	Updated     int64   `gorm:"updated"`
+	Created     time.Time   `gorm:"created"`
+	Updated     time.Time   `gorm:"updated"`
+	Image       string  `gorm:"image"`
+	Offdate	  time.Time   `gorm:"offdate"`     
 }
 
 type ProductCreateParam struct {
@@ -59,8 +63,10 @@ type ProductList struct {
 	Price       float64 `json:"price"`
 	Description string  `json:"description"`
 	Status      int     `json:"status"`
-	Created     int64   `json:"created"`
-	Updated     int64   `json:"updated"`
+	Created     time.Time   `json:"created"`
+	Updated     time.Time   `json:"updated"`
+	Image	string  `json:"image"`
+	Offdate	time.Time   `json:"offdate"`
 }
 
 type ProductInfo struct {
