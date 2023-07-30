@@ -5,7 +5,7 @@ import { Dialog } from '@/components/Dialog'
 import { useI18n } from '@/hooks/web/useI18n'
 import { ElButton, ElTag } from 'element-plus'
 import { Table } from '@/components/Table'
-import { getContractListApi, updateContractApi, createContractApi } from '@/api/contract'
+import { getContactListApi, updateContactApi, createContactApi } from '@/api/contact'
 import { useTable } from '@/hooks/web/useTable'
 import { ContractTableData } from '@/api/contract/types'
 import { h, ref, unref, reactive } from 'vue'
@@ -14,10 +14,9 @@ import Detail from './components/Detail.vue'
 import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas'
 import { TableColumn } from '@/types/table'
 import dayjs from 'dayjs'
-import { ContractTableData } from '@/api/contract/types'
 
 const { register, tableObject, methods, elTableRef, paginationObj } = useTable<ContractTableData>({
-  getListApi: getContractListApi,
+  getListApi: getContactListApi,
   response: {
     message: 'message',
     data: 'data',
@@ -162,9 +161,9 @@ const save = async () => {
       let apiMethod
 
       if (actionType.value === 'edit') {
-        apiMethod = updateContractApi
+        apiMethod = updateContactApi
       } else {
-        apiMethod = createContractApi
+        apiMethod = createContactApi
       }
 
       const res = await apiMethod(data)

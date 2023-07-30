@@ -26,25 +26,26 @@ func (c *ContractDao) Create(param *models.ContractCreateParam) error {
 		Productlist: param.Productlist,
 		Status:      param.Status,
 		Creator:     param.Creator,
-		Created:     time.Now().Unix(),
+		Created:     time.Now(),
 	}
 	return global.Db.Create(&contract).Error
 }
 
 func (c *ContractDao) Update(param *models.ContractUpdateParam) error {
 	contract := models.Contract{
-		Id:          param.Id,
-		Name:        param.Name,
-		Amount:      param.Amount,
-		BeginTime:   param.BeginTime,
-		OverTime:    param.OverTime,
-		Remarks:     param.Remarks,
-		Cid:         param.Cid,
-		Productlist: param.Productlist,
-		Status:      param.Status,
-		Updated:     time.Now(),
+		Id:        param.Id,
+		Name:      param.Name,
+		Amount:    param.Amount,
+		BeginTime: param.BeginTime,
+		OverTime:  param.OverTime,
+		Remarks:   param.Remarks,
+		Cid:       param.Cid,
+		// Productlist: param.Productlist,
+		Status:     param.Status,
+		Updated:    time.Now(),
+		Importance: param.Importance,
 	}
-	db := global.Db.Model(&contract).Select("*").Omit("id", "creator", "created")
+	db := global.Db.Model(&contract).Select("*").Omit("id", "creator", "created", "Cid")
 	return db.Updates(&contract).Error
 }
 

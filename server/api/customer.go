@@ -1,13 +1,13 @@
 package api
 
 import (
+	"strconv"
 	"vue-admin-element/models"
 	"vue-admin-element/response"
 	"vue-admin-element/service"
-	"log"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
 )
 
 type CustomerApi struct {
@@ -38,10 +38,14 @@ func (c *CustomerApi) Create(context *gin.Context) {
 // 更新产品
 func (c *CustomerApi) Update(context *gin.Context) {
 	var param models.CustomerUpdateParam
+	log.Println(context)
 	if err := context.ShouldBind(&param); err != nil {
 		response.Result(response.ErrCodeParamInvalid, nil, context)
+		log.Printf("dddddddddd")
+		log.Println(err)
 		return
 	}
+	log.Printf("cccccccccccc")
 	errCode := c.customerService.Update(&param)
 	response.Result(errCode, nil, context)
 }

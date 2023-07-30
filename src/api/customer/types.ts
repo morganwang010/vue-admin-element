@@ -1,5 +1,5 @@
 export type CustomerTableData = {
-  id: string
+  id: number
   name: string
   mobilephone: string
   email: string
@@ -7,8 +7,8 @@ export type CustomerTableData = {
   remarks: string
   cname: string
   status: number
-  created: string
-  updated: number
   domain: string
   address: string
+  latestsign: string
+  importance: number
 }

@@ -3,6 +3,7 @@ package models
 import (
 	"database/sql/driver"
 	"encoding/json"
+	"time"
 )
 
 type Contract struct {
@@ -16,8 +17,9 @@ type Contract struct {
 	Productlist *Productlist `gorm:"type:json"`
 	Status      int          `gorm:"status"`
 	Creator     int64        `gorm:"creator"`
-	Created     int64        `gorm:"created"`
-	Updated     int64        `gorm:"updated"`
+	Created     time.Time    `gorm:"created"`
+	Updated     time.Time    `gorm:"updated"`
+	Importance  string       `gorm:"importance"`
 }
 
 type ContractCreateParam struct {
@@ -33,15 +35,17 @@ type ContractCreateParam struct {
 }
 
 type ContractUpdateParam struct {
-	Id          int64        `json:"id" binding:"required,gt=0"`
-	Name        string       `json:"name" binding:"required"`
-	Amount      float64      `json:"amount" binding:"omitempty,gt=0"`
-	BeginTime   string       `json:"beginTime" binding:"-"`
-	OverTime    string       `json:"overTime" binding:"-"`
-	Remarks     string       `json:"remarks" binding:"-"`
-	Cid         int64        `json:"cid" binding:"required,gt=0"`
-	Productlist *Productlist `json:"productlist"`
-	Status      int          `json:"status" binding:"required,oneof=1 2"`
+	Id        int64   `json:"id" binding:"required,gt=0"`
+	Name      string  `json:"name" binding:"required"`
+	Amount    float64 `json:"amount" binding:"omitempty,gt=0"`
+	BeginTime string  `json:"beginTime" binding:"-"`
+	OverTime  string  `json:"overTime" binding:"-"`
+	Remarks   string  `json:"remarks" binding:"-"`
+	Cid       int64   `json:"cid" binding:"-"`
+	// Cid       int64   `json:"cid" binding:"required,gt=0"`
+	// Productlist *Productlist `json:"productlist"`
+	Status     int    `json:"status" binding:"required,oneof=1 2"`
+	Importance string `json:"importance"`
 }
 
 type ContractDeleteParam struct {
@@ -58,18 +62,20 @@ type ContractQueryParam struct {
 }
 
 type ContractList struct {
-	Id        int64   `json:"id"`
-	Name      string  `json:"name"`
-	Contact      string  `json:"contact"`
-	Mobilephone      string  `json:"mobilephone"`
-	Amount    float64 `json:"amount"`
-	BeginTime string  `json:"beginTime"`
-	OverTime  string  `json:"overTime"`
-	Remarks   string  `json:"remarks"`
-	Cname     string  `json:"cname"`
-	Status    int     `json:"status"`
-	Created   int64   `json:"created"`
-	Updated   int64   `json:"updated"`
+	Id          int64     `json:"id"`
+	Name        string    `json:"name"`
+	Contact     string    `json:"contact"`
+	Mobilephone string    `json:"mobilephone"`
+	Amount      float64   `json:"amount"`
+	BeginTime   string    `json:"beginTime"`
+	OverTime    string    `json:"overTime"`
+	Remarks     string    `json:"remarks"`
+	Cname       string    `json:"cname"`
+	Status      int       `json:"status"`
+	Created     time.Time `json:"created"`
+	Updated     time.Time `json:"updated"`
+	Cid         int64     `json:"cid"`
+	Importance  string    `json:"importance"`
 }
 
 type ContractInfo struct {
@@ -82,6 +88,7 @@ type ContractInfo struct {
 	Remarks     string       `json:"remarks"`
 	Productlist *Productlist `json:"productlist"`
 	Status      int          `json:"status"`
+	Importance  string       `json:"importance"`
 }
 
 type Products struct {
@@ -95,15 +102,16 @@ type Products struct {
 }
 
 type ContractExcelRow struct {
-	Name      string  `json:"name"`
-	Cname     string  `json:"cname"`
-	Amount    float64 `json:"amount"`
-	BeginTime string  `json:"beginTime"`
-	OverTime  string  `json:"overTime"`
-	Remarks   string  `json:"remarks"`
-	Status    string  `json:"status"`
-	Created   string  `json:"created"`
-	Updated   string  `json:"updated"`
+	Name       string  `json:"name"`
+	Cname      string  `json:"cname"`
+	Amount     float64 `json:"amount"`
+	BeginTime  string  `json:"beginTime"`
+	OverTime   string  `json:"overTime"`
+	Remarks    string  `json:"remarks"`
+	Status     string  `json:"status"`
+	Created    string  `json:"created"`
+	Updated    string  `json:"updated"`
+	Importance string  `json:"importance"`
 }
 
 type Productlist []*Products

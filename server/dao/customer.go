@@ -1,9 +1,9 @@
 package dao
 
 import (
+	"time"
 	"vue-admin-element/global"
 	"vue-admin-element/models"
-	"time"
 )
 
 type CustomerDao struct {
@@ -15,36 +15,38 @@ func NewCustomerDao() *CustomerDao {
 
 func (c *CustomerDao) Create(param *models.CustomerCreateParam) error {
 	customer := models.Customer{
-		Name:     param.Name,
-		Source:   param.Source,
-		Mobilephone:    param.Phone,
-		Email:    param.Email,
-		Industry: param.Industry,
-		Level:    param.Level,
-		Remarks:  param.Remarks,
-		Region:   param.Region,
-		Address:  param.Address,
-		Status:   1,
-		Creator:  param.Creator,
-		Created:  time.Now(),
+		Name:        param.Name,
+		Source:      param.Source,
+		Mobilephone: param.Phone,
+		Email:       param.Email,
+		Industry:    param.Industry,
+		Level:       param.Level,
+		Remarks:     param.Remarks,
+		Region:      param.Region,
+		Address:     param.Address,
+		Status:      1,
+		Creator:     param.Creator,
+		Created:     time.Now(),
 	}
 	return global.Db.Create(&customer).Error
 }
 
 func (c *CustomerDao) Update(param *models.CustomerUpdateParam) error {
 	customer := models.Customer{
-		Id:       param.Id,
-		Name:     param.Name,
-		Source:   param.Source,
-		Mobilephone:    param.Phone,
-		Email:    param.Email,
-		Industry: param.Industry,
-		Level:    param.Level,
-		Remarks:  param.Remarks,
-		Region:   param.Region,
-		Address:  param.Address,
-		Status:   param.Status,
-		Updated:  time.Now(),
+		Id:          param.Id,
+		Name:        param.Name,
+		Source:      param.Source,
+		Mobilephone: param.Mobilephone,
+		Email:       param.Email,
+		Industry:    param.Industry,
+		Level:       param.Level,
+		Remarks:     param.Remarks,
+		Region:      param.Region,
+		Address:     param.Address,
+		Status:      param.Status,
+		Updated:     time.Now(),
+		Contact:     param.Contact,
+		Importance:  param.Importance,
 	}
 	db := global.Db.Model(&customer).Select("*").Omit("id", "creator", "created")
 	return db.Updates(&customer).Error

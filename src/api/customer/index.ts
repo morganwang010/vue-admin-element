@@ -5,14 +5,13 @@ export const getCustomerListApi = (params: any): Promise<IResponse<CustomerTable
   return request.get({ url: '/customer/list', params })
 }
 
-export const saveTableApi = (data: Partial<CustomerTableData>): Promise<IResponse> => {
-  return request.post({ url: '/example/save', data })
+export const createCustomerApi = (data: Partial<CustomerTableData>): Promise<IResponse> => {
+  return request.post({ url: '/customer/save', data })
 }
 
-export const getTableDetApi = (id: string): Promise<IResponse<CustomerTableData>> => {
-  return request.get({ url: '/example/detail', params: { id } })
+export const updateCustomerApi = (data: Partial<CustomerTableData>): Promise<IResponse> => {
+  return request.put({ url: '/customer/update', data })
 }
-
 export const delTableListApi = (ids: string[] | number[]): Promise<IResponse> => {
   return request.post({ url: '/example/delete', data: { ids } })
 }

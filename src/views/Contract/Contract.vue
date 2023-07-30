@@ -1,21 +1,20 @@
 <script setup lang="ts">
 import { ContentWrap } from '@/components/ContentWrap'
+import { Search } from '@/components/Search'
 import { Dialog } from '@/components/Dialog'
 import { useI18n } from '@/hooks/web/useI18n'
+import { ElButton, ElTag } from 'element-plus'
 import { Table } from '@/components/Table'
-import { getContractListApi } from '@/api/contract'
-import { getDictOneApi } from '@/api/common'
-import { ContractTableData } from '@/api/contract/types'
-import { ref, h, reactive, unref } from 'vue'
-import { ElTag, ElButton } from 'element-plus'
+import { getContractListApi, updateContractApi, createContractApi } from '@/api/contract'
 import { useTable } from '@/hooks/web/useTable'
-import { TableColumn, TableSlotDefault } from '@/types/table'
-import { Form, FormExpose } from '@/components/Form'
-import { FormSchema } from '@/types/form'
-import { useValidator } from '@/hooks/web/useValidator'
-
+import { ContractTableData } from '@/api/contract/types'
+import { h, ref, unref, reactive } from 'vue'
+import Write from './components/Write.vue'
+import Detail from './components/Detail.vue'
+import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas'
+import { TableColumn } from '@/types/table'
 import dayjs from 'dayjs'
-const { required } = useValidator()
+
 const { register, tableObject, methods, elTableRef, paginationObj } = useTable<ContractTableData>({
   getListApi: getContractListApi,
   response: {
@@ -25,28 +24,25 @@ const { register, tableObject, methods, elTableRef, paginationObj } = useTable<C
     total: 'total'
   }
 })
-const dialogVisible2 = ref(false)
+// const { register, tableObject, methods } = useTable<TableData>({
+//   getListApi: getTableListApi,
+//   delListApi: delTableListApi,
+//   response: {
+//     list: 'list',
+//     total: 'total'
+//   },
+//   defaultParams: {
+//     title: 's'
+//   }
+// })
 
-const formRef = ref<FormExpose>()
-
-const formSubmit = () => {
-  unref(formRef)
-    ?.getElFormRef()
-    ?.validate((valid) => {
-      if (valid) {
-        console.log('submit success')
-      } else {
-        console.log('submit fail')
-      }
-    })
-}
-const { getList } = methods
+const { getList, setSearchParams } = methods
 
 getList()
 
 const { t } = useI18n()
 
-const columns = reactive<TableColumn[]>([
+const crudSchemas = reactive<CrudSchema[]>([
   {
     field: 'id',
     label: t('contractTable.index'),
@@ -114,144 +110,170 @@ const columns = reactive<TableColumn[]>([
   }
 ])
 
-const schema = reactive<FormSchema[]>([
-  {
-    field: 'field1',
-    label: t('formDemo.input'),
-    component: 'Input',
-    formItemProps: {
-      rules: [required()]
-    }
-  },
-  {
-    field: 'field2',
-    label: t('formDemo.select'),
-    component: 'Select',
-    componentProps: {
-      options: [
-        {
-          label: 'option1',
-          value: '1'
-        },
-        {
-          label: 'option2',
-          value: '2'
-        }
-      ]
-    }
-  },
-  {
-    field: 'field3',
-    label: t('formDemo.radio'),
-    component: 'Radio',
-    componentProps: {
-      options: [
-        {
-          label: 'option-1',
-          value: '1'
-        },
-        {
-          label: 'option-2',
-          value: '2'
-        }
-      ]
-    }
-  },
-  {
-    field: 'field4',
-    label: t('formDemo.checkbox'),
-    component: 'Checkbox',
-    value: [],
-    componentProps: {
-      options: [
-        {
-          label: 'option-1',
-          value: '1'
-        },
-        {
-          label: 'option-2',
-          value: '2'
-        },
-        {
-          label: 'option-3',
-          value: '3'
-        }
-      ]
-    }
-  },
-  {
-    field: 'field5',
-    component: 'DatePicker',
-    label: t('formDemo.datePicker'),
-    componentProps: {
-      type: 'date'
-    }
-  },
-  {
-    field: 'field6',
-    component: 'TimeSelect',
-    label: t('formDemo.timeSelect')
-  }
-])
-const getDictOne = async () => {
-  const res = await getDictOneApi()
-  if (res) {
-    schema[1].componentProps!.options = res.data
-  }
-}
-const actionFn = (data: TableSlotDefault) => {
-  // schema[1].componentProps!.options = data
-  console.log(data)
+const { allSchemas } = useCrudSchemas(crudSchemas)
+
+const dialogVisible = ref(false)
+
+const dialogTitle = ref('')
+
+const AddAction = () => {
+  dialogTitle.value = t('exampleDemo.add')
+  tableObject.currentRow = null
+  dialogVisible.value = true
+  actionType.value = ''
 }
 
-// getDictOne()
+const delLoading = ref(false)
+
+const delData = async (row: ContractTableData | null, multiple: boolean) => {
+  tableObject.currentRow = row
+  const { delList, getSelections } = methods
+  const selections = await getSelections()
+  delLoading.value = true
+  await delList(
+    multiple ? selections.map((v) => v.id) : [tableObject.currentRow?.id as string],
+    multiple
+  ).finally(() => {
+    delLoading.value = false
+  })
+}
+
+const actionType = ref('')
+
+const action = (row: ContractTableData, type: string) => {
+  dialogTitle.value = t(type === 'edit' ? 'exampleDemo.edit' : 'exampleDemo.detail')
+  actionType.value = type
+  tableObject.currentRow = row
+  dialogVisible.value = true
+}
+
+const writeRef = ref<ComponentRef<typeof Write>>()
+
+const loading = ref(false)
+
+const save = async () => {
+  const write = unref(writeRef)
+  await write?.elFormRef?.validate(async (isValid) => {
+    if (isValid) {
+      loading.value = true
+      const data = (await write?.getFormData()) as ContractTableData
+      console.log(actionType.value)
+
+      if (actionType.value === 'edit') {
+        const params = {
+          id: data.id,
+          name: data.name,
+          amount: data.amount,
+          beginTime: data.beginTime,
+          overTime: data.overTime,
+          remarks: data.remarks,
+          cname: data.cname,
+          status: data.status,
+          cid: '77',
+          productList: 'fff'
+        }
+        const res = await updateContractApi(data)
+          .catch(() => {})
+          .finally(() => {
+            loading.value = false
+          })
+        if (res) {
+          dialogVisible.value = false
+          tableObject.currentPage = 1
+          getList()
+        }
+      } else {
+        const res = await createContractApi(data)
+          .catch(() => {})
+          .finally(() => {
+            loading.value = false
+          })
+        if (res) {
+          dialogVisible.value = false
+          tableObject.currentPage = 1
+          getList()
+        }
+      }
+
+      // const res = await apiMethod(data)
+      //   .catch(() => {})
+      //   .finally(() => {
+      //     loading.value = false
+      //   })
+      // if (res) {
+      //   dialogVisible.value = false
+      //   tableObject.currentPage = 1
+      //   getList()
+      // }
+    }
+  })
+}
 </script>
 
 <template>
   <ContentWrap>
+    <!-- <Search
+      :model="{ title: 's' }"
+      :schema="allSchemas.searchSchema"
+      @search="setSearchParams"
+      @reset="setSearchParams"
+    /> -->
+
+    <div class="mb-10px">
+      <ElButton type="primary" @click="AddAction">{{ t('exampleDemo.add') }}</ElButton>
+      <ElButton :loading="delLoading" type="danger" @click="delData(null, true)">
+        {{ t('exampleDemo.del') }}
+      </ElButton>
+    </div>
+
     <Table
       v-model:pageSize="tableObject.pageSize"
       v-model:currentPage="tableObject.currentPage"
-      :columns="columns"
+      :columns="allSchemas.tableColumns"
       :data="tableObject.tableList"
       :loading="tableObject.loading"
-      :pagination="paginationObj"
+      :pagination="{
+        total: tableObject.total
+      }"
       @register="register"
     >
-      <template #action="data">
+      <template #action="{ row }">
         <ElButton type="primary" v-hasPermi="['example:dialog:edit']" @click="action(row, 'edit')">
           {{ t('exampleDemo.edit') }}
         </ElButton>
-        <ElButton type="primary" @click="actionFn(data as TableSlotDefault)">
-          {{ t('contractTable.edit') }}
+        <ElButton
+          type="success"
+          v-hasPermi="['example:dialog:view']"
+          @click="action(row, 'detail')"
+        >
+          {{ t('exampleDemo.detail') }}
         </ElButton>
-        <ElButton type="primary" @click="dialogVisible2 = !dialogVisible2">
-          {{ t('dialogDemo.combineWithForm') }}
+        <ElButton type="danger" v-hasPermi="['example:dialog:delete']" @click="delData(row, false)">
+          {{ t('exampleDemo.del') }}
         </ElButton>
-        <Icon
-          @click="actionFn(data as TableSlotDefault)"
-          class="ml-5px"
-          icon="carbon:skill-level-advanced"
-          :size="14"
-        />
-        <Icon class="ml-5px" icon="bi:question-circle-fill" :size="14" />
-      </template>
-
-      <template #expand="data">
-        <div class="ml-30px">
-          <div>{{ t('tableDemo.title') }}：{{ data.row.title }}</div>
-          <div>{{ t('tableDemo.author') }}：{{ data.row.author }}</div>
-          <div>{{ t('tableDemo.displayTime') }}：{{ data.row.display_time }}</div>
-        </div>
       </template>
     </Table>
-
-    <Dialog v-model="dialogVisible2" :title="t('dialogDemo.dialog')">
-      <Form ref="formRef" :schema="schema" />
-      <template #footer>
-        <ElButton type="primary" @click="formSubmit">{{ t('dialogDemo.submit') }}</ElButton>
-        <ElButton @click="dialogVisible2 = false">{{ t('dialogDemo.close') }}</ElButton>
-      </template>
-    </Dialog>
   </ContentWrap>
+
+  <Dialog v-model="dialogVisible" :title="dialogTitle">
+    <Write
+      v-if="actionType !== 'detail'"
+      ref="writeRef"
+      :form-schema="allSchemas.formSchema"
+      :current-row="tableObject.currentRow"
+    />
+
+    <Detail
+      v-if="actionType === 'detail'"
+      :detail-schema="allSchemas.detailSchema"
+      :current-row="tableObject.currentRow"
+    />
+
+    <template #footer>
+      <ElButton v-if="actionType !== 'detail'" type="primary" :loading="loading" @click="save">
+        {{ t('exampleDemo.save') }}
+      </ElButton>
+      <ElButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</ElButton>
+    </template>
+  </Dialog>
 </template>

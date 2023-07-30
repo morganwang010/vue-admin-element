@@ -10,12 +10,15 @@ export const createContractApi = (data: Partial<ContractTableData>): Promise<IRe
   console.log('hhhhhhhhhhhh')
   return request.post({ url: '/contract/create', data })
 }
-
 export const updateContractApi = (data: Partial<ContractTableData>): Promise<IResponse> => {
-  console.log(data)
   console.log('cggggggggggg')
   return request.put({ url: '/contract/update', data })
 }
+// export const updateContractApi = (data: Partial<ContractTableData>): Promise<IResponse> => {
+//   console.log(data)
+//   console.log('cggggggggggg')
+//   return request.put({ url: '/contract/update', data })
+// }
 
 export const getTableDetApi = (id: string): Promise<IResponse<ContractTableData>> => {
   return request.get({ url: '/example/detail', params: { id } })
