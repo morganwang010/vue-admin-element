@@ -2,8 +2,9 @@
 import { ContentWrap } from '@/components/ContentWrap'
 import { Search } from '@/components/Search'
 import { Dialog } from '@/components/Dialog'
+import { ImageUpload } from '@/components/Upload'
 import { useI18n } from '@/hooks/web/useI18n'
-import { ElButton, ElTag, ElImage } from 'element-plus'
+import { ElButton, ElTag, ElImage, ElUpload } from 'element-plus'
 import { Table } from '@/components/Table'
 import { getProductListApi, updateProductApi, createProductApi } from '@/api/product'
 import { useTable } from '@/hooks/web/useTable'
@@ -113,7 +114,7 @@ const crudSchemas = reactive<CrudSchema[]>([
 const { allSchemas } = useCrudSchemas(crudSchemas)
 
 const dialogVisible = ref(false)
-
+const dialogVisible2 = ref(false)
 const dialogTitle = ref('')
 
 const AddAction = () => {
@@ -179,6 +180,11 @@ const save = async () => {
     }
   })
 }
+
+const upload = async () => {
+  console.log('ttttttttttt')
+  dialogVisible2.value = true
+}
 </script>
 
 <template>
@@ -227,6 +233,15 @@ const save = async () => {
       <template #image="{ row }">
         <ElImage :src="row.image" />
       </template>
+      <!-- 如果预览视频时，需要用如下的代码 -->
+      <!-- <template #video>
+      <video width="180" height="180" controls>
+        <source
+          src="https://yiming_chang.gitee.io/pure-admin-doc/video/url.mov"
+          type="video/mp4"
+        />
+      </video>
+    </template> -->
     </Table>
   </ContentWrap>
 
@@ -244,6 +259,12 @@ const save = async () => {
       :current-row="tableObject.currentRow"
     />
 
+    <template #uploadImg>
+      <ElButton v-if="actionType !== 'detail'" type="primary" :loading="loading" @click="upload">
+        {{ t('exampleDemo.save') }}
+      </ElButton>
+    </template>
+
     <template #footer>
       <ElButton v-if="actionType !== 'detail'" type="primary" :loading="loading" @click="save">
         {{ t('exampleDemo.save') }}
@@ -251,4 +272,5 @@ const save = async () => {
       <ElButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</ElButton>
     </template>
   </Dialog>
+  <ImageUpload v-model="dialogVisible2" title="上传文件" />
 </template>

@@ -40,7 +40,10 @@ export default {
     delOk: '确定',
     delCancel: '取消',
     delNoData: '请选择需要删除的数据',
-    delSuccess: '删除成功'
+    delSuccess: '删除成功',
+    save: '保存',
+    startUpload: '开始上传',
+    selectFile: '选择文件'
   },
   error: {
     noPermission: `抱歉，您无权访问此页面。`,

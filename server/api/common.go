@@ -4,7 +4,7 @@ import (
 	"vue-admin-element/models"
 	"vue-admin-element/response"
 	"vue-admin-element/service"
-	"log"
+	log "github.com/sirupsen/logrus"
 
 	"github.com/gin-gonic/gin"
 )
@@ -28,6 +28,7 @@ func (c *CommonApi) InitDatabase(context *gin.Context) {
 // 文件上传
 func (c *CommonApi) FileUpload(context *gin.Context) {
 	file, _ := context.FormFile("file")
+	// log.Println(file)
 	fileInfo, errCode := c.commonService.FileUpload(file)
 	response.Result(errCode, fileInfo, context)
 }

@@ -275,6 +275,5 @@ const save = async () => {
       </ElButton>
       <ElButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</ElButton>
     </template>
-
   </Dialog>
 </template>

@@ -85,6 +85,9 @@ func (c *CommonDao) InitDatabase() error {
 func (c *CommonDao) FileUpload(file *multipart.FileHeader) (*models.FileInfo, error) {
 	dist := global.Config.File.Path
 	name := common.GenUUID() + path.Ext(file.Filename)
+	log.Println(name)
+	log.Println("ddddddddddddd")
+	log.Println(dist)
 	dn := dist + name
 	src, err := file.Open()
 	if err != nil {

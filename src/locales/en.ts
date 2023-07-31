@@ -40,7 +40,9 @@ export default {
     delOk: 'OK',
     delCancel: 'Cancel',
     delNoData: 'Please select the data to delete',
-    delSuccess: 'Deleted successfully'
+    delSuccess: 'Deleted successfully',
+    save: '保存',
+    startUpload: '开始上传'
   },
   error: {
     noPermission: `Sorry, you don't have permission to access this page.`,

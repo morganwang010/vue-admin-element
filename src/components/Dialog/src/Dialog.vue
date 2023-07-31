@@ -83,9 +83,8 @@ const dialogStyle = computed(() => {
 
     <ElScrollbar :style="dialogStyle">
       <slot></slot>
-      <template v-if="slots.upload" #upload>
-        <slot name="upload"></slot>
-      </template>
+
+      <slot name="uploadImg"></slot>
     </ElScrollbar>
 
     <template v-if="slots.footer" #footer>
