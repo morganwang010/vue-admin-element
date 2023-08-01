@@ -1,12 +1,14 @@
 import request from '@/config/axios'
 import type { TableData } from './types'
 
-export const uploadImgApi = (params: any): Promise<IResponse> => {
+export const uploadImageApi = (formData: any): Promise<IResponse> => {
+  console.log('hhhhhhhhhhhhhhhh')
   return request.post({
     url: '/common/file/upload',
-    params,
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
+    data: formData,
+    headersType: 'multipart/form-data'
+    // headers: {
+    //   'Content-Type': 'multipart/form-data'
+    // }
   })
 }

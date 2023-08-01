@@ -28,6 +28,8 @@ service.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     config.headers['uid'] = localStorage.getItem('uid')
     config.headers['token'] = localStorage.getItem('token')
+    console.log(config.headers)
+    console.log('gggggggggggg')
     if (
       config.method === 'post' &&
       (config.headers as AxiosRequestHeaders)['Content-Type'] ===
@@ -35,6 +37,14 @@ service.interceptors.request.use(
     ) {
       config.data = qs.stringify(config.data)
     }
+    if (
+      config.method === 'post' &&
+      (config.headers as AxiosRequestHeaders)['Content-Type'] === 'multipart/form-data'
+    ) {
+      console.log('kkkkkkkkkkkkkk')
+      config.data = config.data
+    }
+
     // ;(config.headers as AxiosRequestHeaders)['Token'] = 'test test'
     // get参数编码
     if (config.method === 'get' && config.params) {

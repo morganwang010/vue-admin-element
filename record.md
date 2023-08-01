@@ -1,5 +1,8 @@
+### 0801
+- - 封装一个message组件
 ### 0731
-- 使用gitemoji ,先安装 npm i -g gitmoji-cli，
+- 使用gitemoji ,先安装 npm i -g gitmoji-cli
+
 ### 0730
 - 添加product页面
 - 完成表格编辑功能
