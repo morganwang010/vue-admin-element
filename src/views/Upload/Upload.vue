@@ -1,6 +1,4 @@
 <script lang="ts">
-typescript
-Copy code
 import { Component, Prop } from 'vue-property-decorator';
 import { Uploader } from 'element-plus';
 import { Uploader as EUploader } from 'element-plus/src';

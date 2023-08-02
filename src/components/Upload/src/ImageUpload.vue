@@ -78,12 +78,10 @@ const handleStartUpload = async () => {
     // )
     //构建一个formdData，用于上传文件
     let formData = new FormData()
-    console.log(fileList.value.raw)
-    console.log('cccccccccc')
     formData.append('file', fileList.value.raw)
     const data = await uploadImageApi(formData)
-    console.log(data)
-    console.log('uploading..')
+    console.log(data.name)
+
     isUploadingRef.value = false
     // 生产环境:抛出错误
     // const errorList = data.filter((item: any) => !item.success)
@@ -116,7 +114,6 @@ const beforeUpload = (file: File) => {
     message.error(t('component.upload.maxSizeMultiple'))
     return false
   }
-
   const commonItem = {
     uuid: buildUUID(),
     file,

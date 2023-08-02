@@ -3504,6 +3504,27 @@ element-plus@2.3.3:
     memoize-one "^6.0.0"
     normalize-wheel-es "^1.2.0"
 
+element-plus@^2.1.4:
+  version "2.3.8"
+  resolved "https://registry.npmmirror.com/element-plus/-/element-plus-2.3.8.tgz#46032abe1a712abfb65932f146ee19281312a9cf"
+  integrity sha512-yHQR0/tG2LvPkpGUt7Te/hPmP2XW/BytBNUbx+EFO54VnGCOE3upmQcVffNp1PLgwg9sthYDXontUWpnpmLPJw==
+  dependencies:
+    "@ctrl/tinycolor" "^3.4.1"
+    "@element-plus/icons-vue" "^2.0.6"
+    "@floating-ui/dom" "^1.0.1"
+    "@popperjs/core" "npm:@sxzz/popperjs-es@^2.11.7"
+    "@types/lodash" "^4.14.182"
+    "@types/lodash-es" "^4.17.6"
+    "@vueuse/core" "^9.1.0"
+    async-validator "^4.2.5"
+    dayjs "^1.11.3"
+    escape-html "^1.0.3"
+    lodash "^4.17.21"
+    lodash-es "^4.17.21"
+    lodash-unified "^1.0.2"
+    memoize-one "^6.0.0"
+    normalize-wheel-es "^1.2.0"
+
 emoji-regex@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-8.0.0.tgz#e818fd69ce5ccfcb404594f842963bf53164cc37"
@@ -7626,6 +7647,11 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
 
+v3-infinite-loading@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.npmmirror.com/v3-infinite-loading/-/v3-infinite-loading-1.3.1.tgz#14d4dd2d3e612328c80b80200965778d98b51ea2"
+  integrity sha512-Yi/STWDo+jasQSd8sBCta2u5/C75eLWdTyqkUPOcCEWYFzzw0DddYrDfvjB2IEbcvFxNiA4ljBpNLcRLVe2adA==
+
 v8-compile-cache-lib@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/v8-compile-cache-lib/-/v8-compile-cache-lib-3.0.1.tgz#6336e8d71965cb3d35a1bbb7868445a7c05264bf"
@@ -7804,6 +7830,23 @@ vue-types@^5.0.2:
   integrity sha512-oCSq5MawTli+Jqaf07sCZgJr/FcDCFF5U/VE4WG58S3EAPxqi8nZlbrQ9I50rD5MZdJ3fjgi/IX1tVLL3QUFzA==
   dependencies:
     is-plain-object "5.0.0"
+
+vue-waterfall-plugin-next@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.npmmirror.com/vue-waterfall-plugin-next/-/vue-waterfall-plugin-next-2.2.0.tgz#9da627ed44ef28da26f4f061c41e3788e9fed56a"
+  integrity sha512-rhrTdAlBnMWWt6737L+E08A7itgK3wHTy1NsSDgR9EPiBPuHYlth8jL2/hp2gIMAS4XUxJBtitfNUyK5qynkEA==
+  dependencies:
+    animate.css "^4.1.1"
+    element-plus "^2.1.4"
+
+vue-waterfall-plugin-next@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.npmmirror.com/vue-waterfall-plugin-next/-/vue-waterfall-plugin-next-2.2.2.tgz#04e689846ae88219d1ad2b027f25b3ebab59e038"
+  integrity sha512-w2u2ku7LqikFoLz1DqW+23DEWvIXLNPdWAoLNIYk5y5O3YWAVxg4HSyhTuZ22AhIJ9tnBgF+eubHfk1tjAl91A==
+  dependencies:
+    animate.css "^4.1.1"
+    element-plus "^2.1.4"
+    vue-waterfall-plugin-next "2.2.0"
 
 vue@^3.3.4:
   version "3.3.4"
