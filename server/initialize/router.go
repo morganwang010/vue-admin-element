@@ -68,6 +68,14 @@ func Router() {
 		route.PUT("/product/update", api.NewProductApi().Update)
 		route.DELETE("/product/delete", api.NewProductApi().Delete)
 
+		// 资源模块
+		route.GET("/urls/list", api.NewUrlsApi().GetList)
+		// route.GET("/product/info", api.NewProductApi().GetInfo)
+		// route.GET("/product/export", api.NewProductApi().Export)
+		// route.POST("/product/create", api.NewProductApi().Create)
+		// route.PUT("/product/update", api.NewProductApi().Update)
+		// route.DELETE("/product/delete", api.NewProductApi().Delete)
+
 		// 仪表盘模块
 		route.GET("/dashboard/sum", api.NewDashboardApi().Summary)
 

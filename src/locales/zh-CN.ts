@@ -150,7 +150,8 @@ export default {
     sticky: '黏性',
     contract: '合同管理',
     customer: '客戶管理',
-    product: '产品管理'
+    product: '产品管理',
+    waterFall: '瀑布流'
   },
   permission: {
     hasPermission: '请设置操作权限值'

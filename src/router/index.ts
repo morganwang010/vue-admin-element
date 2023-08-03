@@ -183,7 +183,24 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         component: () => import('@/views/Waterfall/Index.vue'),
         name: 'Waterfall',
         meta: {
-          title: t('router.product'),
+          title: t('router.waterFall'),
+          icon: 'cib:telegram-plane'
+        }
+      }
+    ]
+  },
+  {
+    path: '/cardlist',
+    component: Layout,
+    name: 'CardList',
+    meta: {},
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/Card/CardList.vue'),
+        name: 'CardList',
+        meta: {
+          title: t('router.cardList'),
           icon: 'cib:telegram-plane'
         }
       }

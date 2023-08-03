@@ -22,6 +22,7 @@ const (
 	PRODUCT     = "product"
 	SUBSCRIBE   = "subscribe"
 	NOTICE      = "notice"
+	URLS        = "urls"
 	MAIL_CONFIG = "mail_config"
 
 	// 空值
