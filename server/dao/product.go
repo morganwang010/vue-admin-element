@@ -4,6 +4,7 @@ import (
 	"vue-admin-element/global"
 	"vue-admin-element/models"
 	"time"
+	log "github.com/sirupsen/logrus"
 )
 
 type ProductDao struct {
@@ -62,6 +63,7 @@ func (p *ProductDao) GetList(param *models.ProductQueryParam) ([]*models.Product
 	}
 	productList := make([]*models.ProductList, 0)
 	rows, err := restPage(param.Page, PRODUCT, product, &productList, &[]*models.ProductList{})
+	log.Println(productList)
 	if err != nil {
 		return nil, 0, err
 	}

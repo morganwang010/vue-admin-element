@@ -67,11 +67,13 @@ func (p *UrlsApi) GetList(context *gin.Context) {
 		return
 	}
 	// param.Creator = int64(uid)
-	// log.Println(param.Creator)
-	productList, rows, errCode := p.urlsService.GetList(&param)
-	response.PageResult(errCode, productList, rows, context)
+	log.Println(param.Keywords)
+urlsList, rows, errCode := p.urlsService.GetList(&param)
+	response.PageResult(errCode, urlsList, rows, context)
 }
 
+// 查询产品信息
+ 
 // // 查询产品信息
 // func (p *ProductApi) GetInfo(context *gin.Context) {
 // 	var param models.ProductQueryParam

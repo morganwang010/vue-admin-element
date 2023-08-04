@@ -151,7 +151,8 @@ export default {
     contract: '合同管理',
     customer: '客戶管理',
     product: '产品管理',
-    waterFall: '瀑布流'
+    waterFall: '瀑布流',
+    cardList: '卡片列表'
   },
   permission: {
     hasPermission: '请设置操作权限值'

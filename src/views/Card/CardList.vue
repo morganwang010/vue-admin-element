@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Card from './components/Card.vue'
 import { getCardList } from '@/api/cardList'
-import { message } from '@/utils/message'877777  
+import { message } from '@/utils/message'
 import { ElMessageBox } from 'element-plus'
 import { ref, onMounted, nextTick } from 'vue'
 import dialogForm from './components/DialogForm.vue'
@@ -111,12 +111,10 @@ const handleManageProduct = (product) => {
       <template v-if="pagination.total > 0">
         <el-row :gutter="16">
           <el-col
-            v-for="(product, index) in productList
-              .slice(
-                pagination.pageSize * (pagination.current - 1),
-                pagination.pageSize * pagination.current
-              )
-              .filter((v) => v.name.toLowerCase().includes(searchValue.toLowerCase()))"
+            v-for="(product, index) in productList.slice(
+              pagination.pageSize * (pagination.current - 1),
+              pagination.pageSize * pagination.current
+            )"
             :key="index"
             :xs="24"
             :sm="12"

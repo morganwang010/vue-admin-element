@@ -4,6 +4,7 @@ import (
 	"vue-admin-element/global"
 	"vue-admin-element/models"
 	// "time"
+	log "github.com/sirupsen/logrus"
 )
 
 type UrlsDao struct {
@@ -60,7 +61,32 @@ func (p *UrlsDao) GetList(param *models.UrlsQueryParam) ([]*models.UrlsList, int
 		Status:  param.Status,
 	}
 	urlsList := make([]*models.UrlsList, 0)
-	rows, err := restPage(param.Page, URLS, urls, &urlsList, &[]*models.UrlsList{})
+	log.Println(urlsList)
+	log.Println("ssssssssssss")
+	rows, err := restPage(param.Page, URLS, urls, &urlsList, &urlsList)
+	// rows, err := restPage(param.Page, URLS, urls, &urlsList, &[]*models.UrlsList{})
+    log.Println("gggggg")
+	log.Println(urlsList)
+
+	// log.Println("eeeeeeeeeee")
+	// if param.Page.PageIndex > 0 && param.Page.PageSize > 0 {
+	// 	offset := (param.Page.PageIndex - 1) * param.Page.PageSize
+	// 	global.Db.Offset(offset).Limit(param.Page.PageSize).Table(URLS).Where("keywords like ?",param.Keywords).Find(urlsList)
+	// }
+	// // global.Db.LogMode(gorm.LogMode(gorm.All))
+	
+	// // res := global.Db.Table(name).Where("keywords like ?","%param.Keywords%").Find(bind)
+	// log.Println(param.Keywords)
+	// // 	res := global.Db.Table(URLS).Where("keywords like ?",param.Keywords).Find(&[]*models.UrlsList{})
+	// res := global.Db.Table(URLS).Find(&[]*models.UrlsList{})
+
+	// log.Println(res.RowsAffected)
+ 
+	// if res.Error != nil {
+	// 	return nil, 0, res.Error
+	// }
+	// return urlsList, rows, res.Error
+
 	if err != nil {
 		return nil, 0, err
 	}

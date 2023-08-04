@@ -6,5 +6,5 @@ export const getDictApi = (): Promise<IResponse> => {
 }
 /** 卡片列表 */
 export const getCardList = (data?: object): Promise<IResponse> => {
-  return request.post({ url: '/getCardList', data })
+  return request.get({ url: '/urls/list' })
 }

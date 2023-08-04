@@ -45,11 +45,27 @@ var ctx = context.Background()
 func restPage(page models.Page, name string, query interface{}, dest interface{}, bind interface{}) (int64, error) {
 	if page.PageIndex > 0 && page.PageSize > 0 {
 		offset := (page.PageIndex - 1) * page.PageSize
+		res1 := global.Db.Offset(offset).Limit(page.PageSize).Table(name).Where(query).Find(dest)
+		return res1.RowsAffected, res1.Error
+	}
+	res := global.Db.Table(name).Where(query).Find(bind)
+	log.Println(bind)
+	log.Println("CCCCCC")
+	return res.RowsAffected, res.Error
+}
+
+
+func getUrls(page models.Page, name string, query interface{}, dest interface{}, bind interface{}) (int64, error) {
+	log.Println("eeeeeeeeeee")
+	if page.PageIndex > 0 && page.PageSize > 0 {
+		offset := (page.PageIndex - 1) * page.PageSize
 		global.Db.Offset(offset).Limit(page.PageSize).Table(name).Where(query).Find(dest)
 	}
 	res := global.Db.Table(name).Where(query).Find(bind)
+	log.Println(res)
 	return res.RowsAffected, res.Error
 }
+
 
 type CommonDao struct {
 }

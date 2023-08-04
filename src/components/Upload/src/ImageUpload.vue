@@ -28,7 +28,7 @@ import { useMessage } from '/@/hooks/web/useMessage'
 import { buildUUID } from '/@/utils/uuid'
 import { checkImgType, getBase64WithFile } from './helper'
 import type { UploadProps, UploadUserFile, UploadFiles } from 'element-plus'
-import { composeEventHandlers } from 'element-plus/es/utils'
+// import { composeEventHandlers } from 'element-plus/es/utils'
 
 const fileList = ref<UploadUserFile[]>()
 
