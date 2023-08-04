@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, PropType } from 'vue'
-import { ElRow, ElCol } from 'element-ui'
+// import { ElRow, ElCol } from 'element-ui'
+import { ElRow, ElCard, ElDropdown, ElDropdownMenu, ElTag, ElDropdownItem } from 'element-plus'
 import shopIcon from '@/assets/svgs/shop.svg?component'
 import laptopIcon from '@/assets/svgs/laptop.svg?component'
 import serviceIcon from '@/assets/svgs/service.svg?component'
@@ -50,7 +51,24 @@ const cardLogoClass = computed(() => [
   <div :class="cardClass">
     <div class="list-card-item_detail bg-bg_color">
       <el-row justify="space-between">
-        <div :class="cardLogoClass">
+        <el-col v-for="(o, index) in 2" :key="o" :span="8" :offset="index > 0 ? 2 : 0">
+          <el-card :body-style="{ padding: '0px' }">
+            <img
+              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+              class="image"
+            />
+            <div>
+              <a :href="product.url">
+                <p class="list-card-item_detail--name text-text_color_primary">
+                  {{ product.url }}
+                </p>
+                <p class="list-card-item_detail--desc text-text_color_regular">
+                  {{ product.description }}
+                </p>
+              </a>
+            </div>
+          </el-card>
+          <!-- <div :class="cardLogoClass">
           <shopIcon v-if="product.type === 1" />
           <calendarIcon v-if="product.type === 2" />
           <serviceIcon v-if="product.type === 3" />
@@ -74,14 +92,9 @@ const cardLogoClass = computed(() => [
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-        </div>
+        </div> -->
+        </el-col>
       </el-row>
-      <p class="list-card-item_detail--name text-text_color_primary">
-        {{ product.url }}
-      </p>
-      <p class="list-card-item_detail--desc text-text_color_regular">
-        {{ product.description }}
-      </p>
     </div>
   </div>
 </template>

@@ -3,6 +3,7 @@ import Card from './components/Card.vue'
 import { getCardList } from '@/api/cardList'
 import { message } from '@/utils/message'
 import { ElMessageBox } from 'element-plus'
+import { ElRow, ElCol, ElBacktop, ElDropdown, ElCard } from 'element-plus'
 import { ref, onMounted, nextTick } from 'vue'
 import dialogForm from './components/DialogForm.vue'
 import { useRenderIcon } from '@/components/ReIcon/src/hooks'
@@ -122,11 +123,27 @@ const handleManageProduct = (product) => {
             :lg="6"
             :xl="4"
           >
-            <Card
+            <el-card :body-style="{ padding: '0px' }">
+              <img
+                src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image"
+              />
+              <div>
+                <a :href="product.url">
+                  <p class="list-card-item_detail--name text-text_color_primary">
+                    {{ product.url }}
+                  </p>
+                  <p class="list-card-item_detail--desc text-text_color_regular">
+                    {{ product.description }}
+                  </p>
+                </a>
+              </div>
+            </el-card>
+            <!-- <Card
               :product="product"
               @delete-item="handleDeleteItem"
               @manage-product="handleManageProduct"
-            />
+            /> -->
           </el-col>
         </el-row>
         <!-- <el-pagination

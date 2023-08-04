@@ -12,7 +12,8 @@ type Urls struct {
 	Like      int     `gorm:"like"`
 	Created     time.Time   `gorm:"created"`
 	Updated     time.Time   `gorm:"updated"`
-	remarks      string  `gorm:"remarks"` 
+	Remarks      string  `gorm:"remarks"` 
+	Title      string  `gorm:"title"` 
 
 }
 
@@ -59,8 +60,8 @@ type UrlsList struct {
 	Like      int     `json:"like"`
 	Created     time.Time   `json:"created"`
 	Updated     time.Time   `json:"updated"`
-	remarks       string  `json:"remarks"` 
-
+	Remarks       string  `json:"remarks"` 
+	Title       string  `json:"title"` 
 }
 
 // type ProductInfo struct {
