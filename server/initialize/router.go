@@ -76,6 +76,9 @@ func Router() {
 		// route.PUT("/product/update", api.NewProductApi().Update)
 		// route.DELETE("/product/delete", api.NewProductApi().Delete)
 
+		// 过程模块
+		route.GET("/process/list", api.NewProcessApi().GetList)
+		
 		// 仪表盘模块
 		route.GET("/dashboard/sum", api.NewDashboardApi().Summary)
 

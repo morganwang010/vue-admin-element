@@ -1,9 +1,30 @@
 
-  CREATE TABLE public.role (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL
+		CREATE TABLE process (
+  id SERIAL not Null,  -- 自增主键id
+  creatorid INTEGER,     -- 创建者creator_id
+  contractid INTEGER,    -- 合同contract_id
+  created DATE,           -- 创建日期created
+  amount NUMERIC,         -- 金额amount
+  remarks TEXT, --备注
+  PRIMARY key (id)
+);
+drop table process 
+
+CREATE TABLE public.urls (
+  id serial PRIMARY KEY,
+  url character varying(255) DEFAULT NULL,
+  description text DEFAULT NULL,
+  keywords text DEFAULT NULL
 );
 
+
+select  * from product p ;
+select  * from customer c where id = 243;
+select * from user;
+
+select *  from public.user where username = 'admin'
+
+SELECT * FROM "public"."user" WHERE username = 'admin' ORDER BY "user"."id" LIMIT 1
 
 CREATE TABLE public.user (
   id serial PRIMARY KEY,
@@ -31,8 +52,8 @@ CREATE TABLE public.contract (
   id bigserial NOT NULL,
   name character varying(200) DEFAULT NULL,
   amount numeric(10,2) DEFAULT NULL,
-  begin_time date DEFAULT NULL,
-  over_time date DEFAULT NULL,
+  begin_time character varying(50) DEFAULT NULL,
+  over_time character varying(50) DEFAULT NULL,
   remarks character varying(80) DEFAULT NULL,
   cid bigint DEFAULT NULL,
   productlist jsonb DEFAULT NULL,
@@ -109,3 +130,60 @@ INSERT INTO public.mail_config (id, stmp, port, auth_code, email, status, creato
 VALUES (11, 'smtp.qq.com', 465, 'zrzxsebacrpfdaeg', '200300666@qq.com', 2, 29, 1674901189, 1674901237);
 
 
+
+select * from urls u where keywords like '%公有云%'
+update urls set status = 1;
+
+CREATE TABLE public.product (
+  id bigserial NOT NULL, -- 编号
+  name varchar(50) DEFAULT NULL, -- 名称
+  type smallint DEFAULT NULL, -- 类型
+  unit char(5) DEFAULT NULL, -- 单位
+  code varchar(80) DEFAULT NULL, -- 编码
+  price numeric(10,2) DEFAULT NULL, -- 价格
+  description varchar(200) DEFAULT NULL, -- 描述
+  status smallint DEFAULT NULL, -- 状态，1-上架，2-下架
+  creator bigint DEFAULT NULL, -- 创建人
+  created bigint DEFAULT NULL, -- 创建时间
+  updated bigint DEFAULT NULL, -- 更新时间
+  PRIMARY KEY (id)
+ 
+);
+
+INSERT INTO public.product (id, name, type, unit, code, price, description, status, creator, created, updated)
+VALUES (1, '电动车1', 1, '台', '004', 1498.00, '代驾折叠电动车电动自行车成人代步外卖锂电池小型轻便电瓶车迷你便携电单车 G2/汽车电芯-能量回收-6Ah约60km', 1, 29, 1671191995, 0);
+
+INSERT INTO public.product (id, name, type, unit, code, price, description, status, creator, created, updated)
+VALUES (2, '电动车2', 1, '台', '004', 1498.00, '代驾折叠电动车电动自行车成人代步外卖锂电池小型轻便电瓶车迷你便携电单车 G2/汽车电芯-能量回收-6Ah约60km', 1, 29, 1671191995, 0);
+
+
+
+
+CREATE TABLE public.contract (
+  id bigserial NOT NULL,
+  name character varying(200) DEFAULT NULL,
+  amount numeric(10,2) DEFAULT NULL,
+  begin_time time DEFAULT NULL,
+  over_time time DEFAULT NULL,
+  remarks character varying(80) DEFAULT NULL,
+  cid bigint DEFAULT NULL,
+  productlist jsonb DEFAULT NULL,
+  status smallint DEFAULT NULL,
+  creator bigint DEFAULT NULL,
+  created time DEFAULT NULL,
+  updated time DEFAULT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_creator FOREIGN KEY (creator) REFERENCES public.user (id)
+);
+
+
+CREATE TABLE notice (
+  id BIGSERIAL PRIMARY KEY, -- 编号
+  content VARCHAR(200), -- 通知内容
+  status SMALLINT, -- 状态，1-已读，2-未读
+  creator BIGINT, -- 创建者
+  created BIGINT, -- 创建时间
+  updated BIGINT -- 更新时间
+);
+
+CREATE INDEX idx_creator ON notice (creator);

@@ -23,6 +23,7 @@ const (
 	SUBSCRIBE   = "subscribe"
 	NOTICE      = "notice"
 	URLS        = "urls"
+	PROCESS        = "process"
 	MAIL_CONFIG = "mail_config"
 
 	// 空值
@@ -49,14 +50,11 @@ func restPage(page models.Page, name string, query interface{}, dest interface{}
 		return res1.RowsAffected, res1.Error
 	}
 	res := global.Db.Table(name).Where(query).Find(bind)
-	log.Println(bind)
-	log.Println("CCCCCC")
 	return res.RowsAffected, res.Error
 }
 
 
 func getUrls(page models.Page, name string, query interface{}, dest interface{}, bind interface{}) (int64, error) {
-	log.Println("eeeeeeeeeee")
 	if page.PageIndex > 0 && page.PageSize > 0 {
 		offset := (page.PageIndex - 1) * page.PageSize
 		global.Db.Offset(offset).Limit(page.PageSize).Table(name).Where(query).Find(dest)
