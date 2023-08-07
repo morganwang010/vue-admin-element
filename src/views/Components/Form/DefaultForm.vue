@@ -188,7 +188,7 @@ const options3: ComponentOptions[] = [
             label: 'DateTimePicker'
           },
           {
-            value: 'upload',
+            value: 'basic-upload',
             label: 'Upload'
           },
           {
@@ -352,6 +352,11 @@ const schema = reactive<FormSchema[]>([
     field: 'field1',
     label: t('formDemo.input'),
     component: 'Divider'
+  },
+  {
+    field: 'field64',
+    component: 'Upload',
+    label: t('formDemo.default')
   },
   {
     field: 'field2',
@@ -1027,7 +1032,7 @@ const schema = reactive<FormSchema[]>([
   {
     field: 'field63',
     component: 'TimeSelect',
-    label: t('formDemo.default')
+    label: 'gggggggggg'
   }
 ])
 </script>

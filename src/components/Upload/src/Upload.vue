@@ -49,7 +49,7 @@ const isUploadingRef = ref(false)
 const fileListRef = ref<FileItem[]>([])
 const files = ref<string[]>([])
 // const { accept, helpText, maxNumber, maxSize } = toRefs(props)
-
+const loading = ref(false)
 // const tableData = {}
 const { maxNumber } = props
 const dialogVisible2 = ref(false)
@@ -149,14 +149,22 @@ const handleChange = (uploadFile) => {
   console.log(uploadFile)
   console.log(fileList)
 }
+const upload = async () => {
+  // console.log('ttttttttttt')
+  dialogVisible2.value = true
+}
 </script>
 
 <template>
+  <ElButton type="primary" :loading="loading" @click="upload">
+    {{ t('exampleDemo.save') }}
+  </ElButton>
   <ElDialog
     :fullscreen="false"
     destroy-on-close
     lock-scroll
     draggable
+    v-model="dialogVisible2"
     :close-on-click-modal="false"
   >
     <ElUpload

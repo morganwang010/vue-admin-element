@@ -24,18 +24,6 @@ const { register, tableObject, methods, elTableRef, paginationObj } = useTable<C
     total: 'total'
   }
 })
-// const { register, tableObject, methods } = useTable<TableData>({
-//   getListApi: getTableListApi,
-//   delListApi: delTableListApi,
-//   response: {
-//     list: 'list',
-//     total: 'total'
-//   },
-//   defaultParams: {
-//     title: 's'
-//   }
-// })
-
 const { getList, setSearchParams } = methods
 
 getList()
@@ -43,11 +31,6 @@ getList()
 const { t } = useI18n()
 
 const crudSchemas = reactive<CrudSchema[]>([
-  {
-    field: 'id',
-    label: t('contractTable.index'),
-    type: 'index'
-  },
   {
     field: 'cname',
     label: t('contractTable.company')
@@ -113,13 +96,14 @@ const crudSchemas = reactive<CrudSchema[]>([
 const { allSchemas } = useCrudSchemas(crudSchemas)
 
 const dialogVisible = ref(false)
+const dialogVisible2 = ref(false)
 
 const dialogTitle = ref('')
 
 const AddAction = () => {
   dialogTitle.value = t('exampleDemo.add')
   tableObject.currentRow = null
-  dialogVisible.value = true
+  dialogVisible2.value = true
   actionType.value = ''
 }
 
@@ -194,17 +178,6 @@ const save = async () => {
           getList()
         }
       }
-
-      // const res = await apiMethod(data)
-      //   .catch(() => {})
-      //   .finally(() => {
-      //     loading.value = false
-      //   })
-      // if (res) {
-      //   dialogVisible.value = false
-      //   tableObject.currentPage = 1
-      //   getList()
-      // }
     }
   })
 }
@@ -269,6 +242,15 @@ const save = async () => {
       :current-row="tableObject.currentRow"
     />
 
+    <template #footer>
+      <ElButton v-if="actionType !== 'detail'" type="primary" :loading="loading" @click="save">
+        {{ t('exampleDemo.save') }}
+      </ElButton>
+      <ElButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</ElButton>
+    </template>
+  </Dialog>
+
+  <Dialog v-model="dialogVisible2" :title="dialogTitle">
     <template #footer>
       <ElButton v-if="actionType !== 'detail'" type="primary" :loading="loading" @click="save">
         {{ t('exampleDemo.save') }}

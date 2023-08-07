@@ -43,7 +43,8 @@ export default {
     delSuccess: '删除成功',
     save: '保存',
     startUpload: '开始上传',
-    selectFile: '选择文件'
+    selectFile: '选择文件',
+    upload: '上传'
   },
   error: {
     noPermission: `抱歉，您无权访问此页面。`,
@@ -152,7 +153,8 @@ export default {
     customer: '客戶管理',
     product: '产品管理',
     waterFall: '瀑布流',
-    cardList: '卡片列表'
+    cardList: '卡片列表',
+    timeLine: '时间线'
   },
   permission: {
     hasPermission: '请设置操作权限值'

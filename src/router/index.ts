@@ -207,6 +207,40 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     ]
   },
   {
+    path: '/timeline',
+    component: Layout,
+    name: 'TimeLine',
+    meta: {},
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/TimeLine/TimeLine.vue'),
+        name: 'TimeLine',
+        meta: {
+          title: t('router.timeLine'),
+          icon: 'cib:telegram-plane'
+        }
+      }
+    ]
+  },
+  {
+    path: '/realresult',
+    component: Layout,
+    name: 'RealResult',
+    meta: {},
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/Upload/RealResult.vue'),
+        name: 'RealResult',
+        meta: {
+          title: t('router.timeLine'),
+          icon: 'cib:telegram-plane'
+        }
+      }
+    ]
+  },
+  {
     path: '/components',
     component: Layout,
     name: 'ComponentsDemo',

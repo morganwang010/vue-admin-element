@@ -2,7 +2,7 @@
 import { ContentWrap } from '@/components/ContentWrap'
 import { Search } from '@/components/Search'
 import { Dialog } from '@/components/Dialog'
-import { ImageUpload } from '@/components/Upload'
+import { Upload } from '@/components/Upload'
 import { useI18n } from '@/hooks/web/useI18n'
 import { ElButton, ElTag, ElImage, ElUpload } from 'element-plus'
 import { Table } from '@/components/Table'
@@ -272,5 +272,5 @@ const upload = async () => {
       <ElButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</ElButton>
     </template>
   </Dialog>
-  <ImageUpload v-model="dialogVisible2" title="上传文件" />
+  <Upload v-model="dialogVisible2" title="上传文件" />
 </template>

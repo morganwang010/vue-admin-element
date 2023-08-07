@@ -1,3 +1,3 @@
-import ImageUpload from './src/ImageUpload.vue'
+import Upload from './src/Upload.vue'
 
-export { ImageUpload }
+export { Upload }

@@ -1,113 +1,113 @@
-<script lang="ts">
-import { defineComponent, ref, watch, unref, computed } from 'vue'
-import { Recordable } from '@vben/types'
+<script setup lang="ts">
+import { defineComponent, ref, watch, unref, computed, getCurrentInstance } from 'vue'
 import Icon from '@/components/Icon/Icon.vue'
-import { Tooltip, Space } from 'ant-design-vue'
-import { useModal } from '/@/components/Modal'
+import { ElButton, ElTooltip, ElSpace } from 'element-plus'
+import { useModal } from '@/components/Modal'
 import { uploadContainerProps } from './props'
 import { omit } from 'lodash-es'
-import { useI18n } from '/@/hooks/web/useI18n'
-import { isArray } from '/@/utils/is'
+import { useI18n } from '@/hooks/web/useI18n'
+import { isArray } from '@/utils/is'
 import UploadModal from './UploadModal.vue'
 import UploadPreviewModal from './UploadPreviewModal.vue'
 
-export default defineComponent({
-  name: 'BasicUpload',
-  components: { UploadModal, Space, UploadPreviewModal, Icon, Tooltip },
-  props: uploadContainerProps,
-  emits: ['change', 'delete', 'preview-delete', 'update:value'],
+// const { emit } = getCurrentInstance()
 
-  setup(props, { emit, attrs }) {
-    const { t } = useI18n()
-    // 上传modal
-    const [registerUploadModal, { openModal: openUploadModal }] = useModal()
+// export default defineComponent({
+//   name: 'BasicUpload',
+//   components: { UploadModal, ElSpace, UploadPreviewModal, Icon, ElTooltip },
+//   props: uploadContainerProps,
+//   emits: ['change', 'delete', 'preview-delete', 'update:value']
+// })
 
-    //   预览modal
-    const [registerPreviewModal, { openModal: openPreviewModal }] = useModal()
+const { t } = useI18n()
+// // 上传modal
+const [registerUploadModal, { openModal: openUploadModal }] = useModal()
 
-    const fileList = ref<string[]>([])
+// // 预览modal
+// const [registerPreviewModal, { openModal: openPreviewModal }] = useModal()
 
-    const showPreview = computed(() => {
-      const { emptyHidePreview } = props
-      if (!emptyHidePreview) return true
-      return emptyHidePreview ? fileList.value.length > 0 : true
-    })
+// const fileList = ref<string[]>([])
 
-    const bindValue = computed(() => {
-      const value = { ...attrs, ...props }
-      return omit(value, 'onChange')
-    })
+// const showPreview = computed(() => {
+//   const { emptyHidePreview } = props
+//   if (!emptyHidePreview) return true
+//   return emptyHidePreview ? fileList.value.length > 0 : true
+// })
 
-    watch(
-      () => props.value,
-      (value = []) => {
-        fileList.value = isArray(value) ? value : []
-      },
-      { immediate: true }
-    )
+// const bindValue = computed(() => {
+//   const value = { ...attrs, ...props }
+//   return omit(value, 'onChange')
+// })
 
-    // 上传modal保存操作
-    function handleChange(urls: string[]) {
-      fileList.value = [...unref(fileList), ...(urls || [])]
-      emit('update:value', fileList.value)
-      emit('change', fileList.value)
-    }
+// watch(
+//   () => props.value,
+//   (value = []) => {
+//     fileList.value = isArray(value) ? value : []
+//   },
+//   { immediate: true }
+// )
 
-    // 预览modal保存操作
-    function handlePreviewChange(urls: string[]) {
-      fileList.value = [...(urls || [])]
-      emit('update:value', fileList.value)
-      emit('change', fileList.value)
-    }
+// // 上传modal保存操作
+// function handleChange(urls: string[]) {
+//   fileList.value = [...unref(fileList), ...(urls || [])]
+//   emit('update:value', fileList.value)
+//   emit('change', fileList.value)
+// }
 
-    function handleDelete(record: Recordable<any>) {
-      emit('delete', record)
-    }
+// // 预览modal保存操作
+// function handlePreviewChange(urls: string[]) {
+//   fileList.value = [...(urls || [])]
+//   emit('update:value', fileList.value)
+//   emit('change', fileList.value)
+// }
 
-    function handlePreviewDelete(url: string) {
-      emit('preview-delete', url)
-    }
+// function handleDelete(record: Recordable<any>) {
+//   emit('delete', record)
+// }
 
-    return {
-      registerUploadModal,
-      openUploadModal,
-      handleChange,
-      handlePreviewChange,
-      registerPreviewModal,
-      openPreviewModal,
-      fileList,
-      showPreview,
-      bindValue,
-      handleDelete,
-      handlePreviewDelete,
-      t
-    }
-  }
-})
+// function handlePreviewDelete(url: string) {
+//   emit('preview-delete', url)
+// }
+
+// return {
+//   registerUploadModal,
+//   openUploadModal,
+//   handleChange,
+//   handlePreviewChange,
+//   registerPreviewModal,
+//   openPreviewModal,
+//   fileList,
+//   showPreview,
+//   bindValue,
+//   handleDelete,
+//   handlePreviewDelete,
+//   t
+// }
 </script>
 
 <template>
   <div>
-    <Space>
-      <a-button type="primary" @click="openUploadModal" preIcon="carbon:cloud-upload">
-        {{ t('component.upload.upload') }}
-      </a-button>
-      <Tooltip placement="bottom" v-if="showPreview">
+    <el-space>
+      <!-- <el-button type="primary" @click="openUploadModal" preIcon="carbon:cloud-upload"> -->
+      <el-button type="primary" @click="openUploadModal" preIcon="carbon:cloud-upload">
+        {{ t('common.upload') }}
+      </el-button>
+      <!-- <el-tooltip placement="bottom" v-if="showPreview">
         <template #title>
           {{ t('component.upload.uploaded') }}
           <template v-if="fileList.length">
             {{ fileList.length }}
           </template>
         </template>
-        <a-button @click="openPreviewModal">
+        <el-button @click="openPreviewModal">
           <Icon icon="bi:eye" />
           <template v-if="fileList.length && showPreviewNumber">
             {{ fileList.length }}
           </template>
-        </a-button>
-      </Tooltip>
-    </Space>
-    <UploadModal
+        </el-button>
+      </el-tooltip> -->
+    </el-space>
+    <!-- <UploadModal
       v-bind="bindValue"
       :previewFileList="fileList"
       @register="registerUploadModal"
@@ -120,6 +120,6 @@ export default defineComponent({
       @register="registerPreviewModal"
       @list-change="handlePreviewChange"
       @delete="handlePreviewDelete"
-    />
+    /> -->
   </div>
 </template>
