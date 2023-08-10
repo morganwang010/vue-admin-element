@@ -108,7 +108,7 @@ const [registerUploadModal, { openModal: openUploadModal }] = useModal()
       </el-tooltip> -->
     </el-space>
     <!-- <UploadModal
-      v-bind="bindValue"
+      v-bind=" "
       :previewFileList="fileList"
       @register="registerUploadModal"
       @change="handleChange"

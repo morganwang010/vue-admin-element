@@ -21,7 +21,8 @@ export type ComponentName =
   | 'InputPassword'
   | 'Editor'
   | 'Upload'
-
+  | 'Image'
+  
 export type ColProps = {
   span?: number
   xs?: number

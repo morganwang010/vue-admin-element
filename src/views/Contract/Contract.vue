@@ -31,6 +31,7 @@ getList()
 const { t } = useI18n()
 
 const crudSchemas = reactive<CrudSchema[]>([
+
   {
     field: 'cname',
     label: t('contractTable.company')

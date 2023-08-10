@@ -17,7 +17,8 @@ import {
   ElTransfer,
   ElAutocomplete,
   ElDivider,
-  ElUpload
+  ElUpload,
+  ElImage
 } from 'element-plus'
 import { InputPassword } from '@/components/InputPassword'
 import { Editor } from '@/components/Editor'
@@ -46,7 +47,8 @@ const componentMap: Recordable<Component, ComponentName> = {
   RadioButton: ElRadioGroup,
   InputPassword: InputPassword,
   Editor: Editor,
-  Upload: Upload
+  Upload: Upload,
+  Image: ElImage
 }
 
 export { componentMap }

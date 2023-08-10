@@ -11,6 +11,7 @@ import { useTable } from '@/hooks/web/useTable'
 import { ProductTableData } from '@/api/product/types'
 import { h, ref, unref, reactive } from 'vue'
 import Write from './components/Write.vue'
+import DefaultForm from './components/DefaultForm.vue'
 import Detail from './components/Detail.vue'
 import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas'
 import { TableColumn } from '@/types/table'
@@ -67,16 +68,19 @@ const crudSchemas = reactive<CrudSchema[]>([
   },
   {
     field: 'image',
-    label: t('productTable.image')
+    label: t('productTable.image'),
+    formatter: (_: Recordable, __: TableColumn, cellValue: string) => {
+      return h(ElImage, { src: cellValue }, () => cellValue)
+    }
   },
   {
     field: 'created',
-    label: t('productTable.createdDate'),
-    formatter: (_: Recordable, __: TableColumn, cellValue: string) => {
-      return h(() =>
-        cellValue === '' ? t('productTable.null') : dayjs(cellValue).format('YYYY-MM-DD')
-      )
-    }
+    label: t('productTable.createdDate')
+    // formatter: (_: Recordable, __: TableColumn, cellValue: string) => {
+    //   return h(() =>
+    //     cellValue === '' ? t('productTable.null') : dayjs(cellValue).format('YYYY-MM-DD')
+    //   )
+    // }
   },
   {
     field: 'offdate',
@@ -229,10 +233,10 @@ const upload = async () => {
           {{ t('exampleDemo.del') }}
         </ElButton>
       </template>
-
+      <!-- 
       <template #image="{ row }">
         <ElImage :src="row.image" />
-      </template>
+      </template> -->
       <!-- 如果预览视频时，需要用如下的代码 -->
       <!-- <template #video>
       <video width="180" height="180" controls>
@@ -246,13 +250,13 @@ const upload = async () => {
   </ContentWrap>
 
   <Dialog v-model="dialogVisible" :title="dialogTitle">
-    <Write
+    <!-- <Write
       v-if="actionType !== 'detail'"
       ref="writeRef"
       :form-schema="allSchemas.formSchema"
       :current-row="tableObject.currentRow"
-    />
-
+    /> -->
+    <DefaultForm v-if="actionType !== 'detail'" />
     <Detail
       v-if="actionType === 'detail'"
       :detail-schema="allSchemas.detailSchema"
