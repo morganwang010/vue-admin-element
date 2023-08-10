@@ -6,6 +6,7 @@ import {
   ElTableColumn,
   ElTable,
   ElImage,
+  ElIcon,
   ElPagination
 } from 'element-plus'
 import {
@@ -20,12 +21,13 @@ import {
   emit
 } from 'vue'
 import { propTypes } from '@/utils/propTypes'
+import { Picture as IconPicture } from '@element-plus/icons-vue'
 import { useI18n } from '@/hooks/web/useI18n'
 import { uploadImageApi } from '@/api/upload'
 import { basicProps } from './props'
 import { FileItem, UploadResultStatus } from './typing'
-import { useMessage } from '/@/hooks/web/useMessage'
-import { buildUUID } from '/@/utils/uuid'
+import { useMessage } from '@/hooks/web/useMessage'
+import { buildUUID } from '@/utils/uuid'
 import { checkImgType, getBase64WithFile } from './helper'
 import type { UploadProps, UploadUserFile, UploadFiles } from 'element-plus'
 // import { composeEventHandlers } from 'element-plus/es/utils'
@@ -33,6 +35,7 @@ import type { UploadProps, UploadUserFile, UploadFiles } from 'element-plus'
 const fileList = ref<UploadUserFile[]>()
 
 const { t } = useI18n()
+
 const props = {
   ...basicProps,
   maxNumber: 3,
@@ -40,9 +43,22 @@ const props = {
   previewFileList: {
     type: Array as PropType<string[]>,
     default: () => []
-  }
+  },
+  modelValue: propTypes.string.def(''),
+  value: propTypes.string.def('')
 }
+const thumbUrl = ref('')
 
+watch(
+  () => props.modelValue,
+  (val: string) => {
+    if (val === unref(thumbUrl)) return
+    thumbUrl.value = val
+  },
+  {
+    immediate: true
+  }
+)
 const message = useMessage()
 //   是否正在上传
 const isUploadingRef = ref(false)
@@ -126,7 +142,6 @@ const beforeUpload = (file: File) => {
   if (checkImgType(file)) {
     // beforeUpload，如果异步会调用自带上传方法
     // file.thumbUrl = await getBase64(file);
-    console.log('888888888888')
     getBase64WithFile(file).then(({ result: thumbUrl }) => {
       fileListRef.value = [
         ...unref(fileListRef),
@@ -137,7 +152,6 @@ const beforeUpload = (file: File) => {
       ]
     })
   } else {
-    console.log('77777777777777')
     fileListRef.value = [...unref(fileListRef), commonItem]
   }
   return false
@@ -153,12 +167,25 @@ const upload = async () => {
   // console.log('ttttttttttt')
   dialogVisible2.value = true
 }
+console.log('dddddddddd')
+console.log(props.value)
 </script>
 
 <template>
-  <ElButton type="primary" :loading="loading" @click="upload">
+  <div class="block">
+    <span class="demonstration">Custom</span>
+    <el-image :src="thumbUrl.value">
+      <template #error>
+        <div class="image-slot">
+          <el-icon><icon-picture /></el-icon>
+        </div>
+      </template>
+    </el-image>
+  </div>
+
+  <!-- <ElButton type="primary" :loading="loading" @click="upload">
     {{ t('exampleDemo.save') }}
-  </ElButton>
+  </ElButton> -->
   <ElDialog
     :fullscreen="false"
     destroy-on-close
@@ -211,3 +238,41 @@ const upload = async () => {
     </template>
   </ElDialog>
 </template>
+<style scoped>
+.demo-image__error .block {
+  padding: 30px 0;
+  text-align: center;
+  border-right: solid 1px var(--el-border-color);
+  display: inline-block;
+  width: 49%;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+.demo-image__error .demonstration {
+  display: block;
+  color: var(--el-text-color-secondary);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.demo-image__error .el-image {
+  padding: 0 5px;
+  max-width: 300px;
+  max-height: 200px;
+  width: 100%;
+  height: 200px;
+}
+
+.demo-image__error .image-slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: var(--el-fill-color-light);
+  color: var(--el-text-color-secondary);
+  font-size: 30px;
+}
+.demo-image__error .image-slot .el-icon {
+  font-size: 30px;
+}
+</style>

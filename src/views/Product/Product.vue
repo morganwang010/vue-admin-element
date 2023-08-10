@@ -74,6 +74,10 @@ const crudSchemas = reactive<CrudSchema[]>([
     }
   },
   {
+    field: 'image',
+    label: t('productTable.image')
+  },
+  {
     field: 'created',
     label: t('productTable.createdDate')
     // formatter: (_: Recordable, __: TableColumn, cellValue: string) => {
@@ -150,6 +154,7 @@ const action = (row: ProductTableData, type: string) => {
   actionType.value = type
   tableObject.currentRow = row
   dialogVisible.value = true
+  console.log(row)
 }
 
 const writeRef = ref<ComponentRef<typeof Write>>()
@@ -256,7 +261,11 @@ const upload = async () => {
       :form-schema="allSchemas.formSchema"
       :current-row="tableObject.currentRow"
     /> -->
-    <DefaultForm v-if="actionType !== 'detail'" />
+    <DefaultForm
+      v-if="actionType !== 'detail'"
+      :form-schema="allSchemas.formSchema"
+      :current-row="tableObject.currentRow"
+    />
     <Detail
       v-if="actionType === 'detail'"
       :detail-schema="allSchemas.detailSchema"
