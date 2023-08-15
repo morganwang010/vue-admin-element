@@ -37,13 +37,11 @@ const schema1 = reactive<FormSchema[]>([
   {
     field: 'image',
     label: t('formDemo.input'),
-    component: 'Upload',
+    component: 'Image',
+    componentProps: {
+      options: [{ src: props.currentRow.image }]
+    },
     value: props.currentRow.image
-  },
-  {
-    field: 'field64',
-    component: 'Upload',
-    label: t('formDemo.default')
   }
 ])
 const { register, methods, elFormRef } = useForm({
@@ -67,7 +65,6 @@ watch(
   () => props.currentRow,
   (currentRow) => {
     if (!currentRow) return
-    console.log(currentRow)
     const { setValues } = methods
     setValues(currentRow)
   },
@@ -80,12 +77,7 @@ watch(
 
 <template>
   <ContentWrap :title="t('formDemo.defaultForm')" :message="t('formDemo.formDes')">
-    <Form
-      :schema="schema"
-      label-width="auto"
-      :label-position="isMobile ? 'top' : 'right'"
-      @register="register"
-    />
+    <Form label-width="auto" :label-position="isMobile ? 'top' : 'right'" @register="register" />
   </ContentWrap>
 </template>
 
