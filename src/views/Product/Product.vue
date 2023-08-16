@@ -16,6 +16,7 @@ import Detail from './components/Detail.vue'
 import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas'
 import { TableColumn } from '@/types/table'
 import dayjs from 'dayjs'
+import { getFixedColumnOffset } from 'element-plus/es/components/table/src/util'
 
 const { register, tableObject, methods, elTableRef, paginationObj } = useTable<ProductTableData>({
   getListApi: getProductListApi,
@@ -70,7 +71,7 @@ const crudSchemas = reactive<CrudSchema[]>([
     field: 'image',
     label: t('productTable.image'),
     formatter: (_: Recordable, __: TableColumn, cellValue: string) => {
-      return h(ElImage, { src: cellValue }, () => cellValue)
+      return h(ElImage, { src: cellValue, style: 'width:70px;height:70px' }, () => cellValue)
     }
   },
   {
@@ -161,13 +162,10 @@ const save = async () => {
   const defaultForm = unref(defaultFormRef)
   await defaultForm?.elFormRef?.validate(async (isValid) => {
     // console.log(isValid)
-    console.log('3333333333')
     // if (1 == 1) {
     if (isValid) {
       loading.value = true
       const data = (await defaultForm?.getFormData()) as ProductTableData
-      console.log('dddddddddddddddfffffffffffff')
-      console.log(data)
       let apiMethod
 
       if (actionType.value === 'edit') {

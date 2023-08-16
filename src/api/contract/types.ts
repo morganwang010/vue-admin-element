@@ -1,5 +1,5 @@
 export type ContractTableData = {
-  id: string
+  id: number
   name: string
   amount: number
   beginTime: string
@@ -8,5 +8,5 @@ export type ContractTableData = {
   cname: string
   status: number
   created: string
-  updated: number
+  updated: string
 }

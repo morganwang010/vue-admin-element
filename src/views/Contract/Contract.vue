@@ -85,7 +85,11 @@ const crudSchemas = reactive<CrudSchema[]>([
   },
   {
     field: 'amount',
-    label: t('contactTable.mount')
+    label: t('contractTable.mount')
+  },
+  {
+    field: 'status',
+    label: t('contractTable.status')
   },
   {
     field: 'action',
@@ -132,34 +136,23 @@ const action = (row: ContractTableData, type: string) => {
 }
 
 const writeRef = ref<ComponentRef<typeof Write>>()
-console.log(writeRef)
-console.log('4444444444')
 const loading = ref(false)
 
 const save = async () => {
-  console.log('0000000000')
   const write = unref(writeRef)
-  console.log('tttttttttttt')
-  console.log(write)
   await write?.elFormRef?.validate(async (isValid) => {
     if (isValid) {
       loading.value = true
       const data = (await write?.getFormData()) as ContractTableData
-      console.log(actionType.value)
+      for (const key in data) {
+        if (typeof data[key] === 'number') {
+          console.log(key)
+        } else {
+          console.log('eeeeeeeee')
+        }
+      }
 
       if (actionType.value === 'edit') {
-        const params = {
-          id: data.id,
-          name: data.name,
-          amount: data.amount,
-          beginTime: data.beginTime,
-          overTime: data.overTime,
-          remarks: data.remarks,
-          cname: data.cname,
-          status: data.status,
-          cid: '77',
-          productList: 'fff'
-        }
         const res = await updateContractApi(data)
           .catch(() => {})
           .finally(() => {

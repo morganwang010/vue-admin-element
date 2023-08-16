@@ -14,6 +14,7 @@ import Detail from './components/Detail.vue'
 import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas'
 import { TableColumn } from '@/types/table'
 import dayjs from 'dayjs'
+import { string } from 'vue-types'
 
 const { register, tableObject, methods, elTableRef, paginationObj } = useTable<CustomerTableData>({
   getListApi: getCustomerListApi,
@@ -172,6 +173,22 @@ const save = async () => {
         apiMethod = updateCustomerApi
       } else {
         apiMethod = createCustomerApi
+      }
+      console.log('ccccccc')
+      console.log(data)
+      //trim the space before and after of the value in the data
+      for (const key in data) {
+        // data[key] = string(data[key]).trim()
+        console.log(typeof data[key])
+        if (typeof data[key] === 'number') {
+          if (Number.isInteger(data[key])) {
+            data[key] = parseInt(data[key].toString().trim())
+          } else {
+            data[key] = parseFloat(data[key].toString().trim())
+          }
+        } else {
+          data[key] = data[key].toString().trim()
+        }
       }
 
       const res = await apiMethod(data)

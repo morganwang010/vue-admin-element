@@ -175,7 +175,6 @@ const upload = async () => {
   // console.log('ttttttttttt')
   dialogVisible2.value = true
 }
-console.log('dddddddddd')
 console.log(props.modelValue)
 </script>
 

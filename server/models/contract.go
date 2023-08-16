@@ -15,7 +15,7 @@ type Contract struct {
 	Remarks     string       `gorm:"remarks"`
 	Cid         int64        `gorm:"cid"`
 	Productlist *Productlist `gorm:"type:json"`
-	Status      int          `gorm:"status"`
+	Status      int64        `gorm:"status"`
 	Creator     int64        `gorm:"creator"`
 	Created     time.Time    `gorm:"created"`
 	Updated     time.Time    `gorm:"updated"`
@@ -30,7 +30,7 @@ type ContractCreateParam struct {
 	Remarks     string       `json:"remarks" binding:"-"`
 	Cid         int64        `json:"cid" binding:"required,gt=0"`
 	Productlist *Productlist `json:"productlist"`
-	Status      int          `json:"status" binding:"required,oneof=1 2"`
+	Status      int64          `json:"status" binding:"required,oneof=0 1 2"`
 	Creator     int64        `json:"creator,omitempty" binding:"-"`
 }
 
@@ -42,9 +42,8 @@ type ContractUpdateParam struct {
 	OverTime  string  `json:"overTime" binding:"-"`
 	Remarks   string  `json:"remarks" binding:"-"`
 	Cid       int64   `json:"cid" binding:"-"`
-	// Cid       int64   `json:"cid" binding:"required,gt=0"`
-	// Productlist *Productlist `json:"productlist"`
-	Status     int    `json:"status" binding:"required,oneof=1 2"`
+	// Status    int64   `json:"status" binding:"required,oneof=0 1 2"`
+	Status  int64   `json:"status" binding:"-"`
 	Importance string `json:"importance"`
 }
 
@@ -56,7 +55,7 @@ type ContractQueryParam struct {
 	Id      int64   `form:"id" binding:"omitempty,gt=0"`
 	Pids    []int64 `form:"pids" json:"pids" binding:"-"`
 	Name    string  `form:"name" binding:"-"`
-	Status  int     `form:"status" binding:"omitempty,oneof=1 2"`
+	Status  int64   `form:"status" binding:"omitempty,oneof=0 1 2"`
 	Creator int64   `form:"creator,omitempty" binding:"-"`
 	Page    Page
 }
@@ -71,7 +70,7 @@ type ContractList struct {
 	OverTime    string    `json:"overTime"`
 	Remarks     string    `json:"remarks"`
 	Cname       string    `json:"cname"`
-	Status      int       `json:"status"`
+	Status      int64     `json:"status"`
 	Created     time.Time `json:"created"`
 	Updated     time.Time `json:"updated"`
 	Cid         int64     `json:"cid"`

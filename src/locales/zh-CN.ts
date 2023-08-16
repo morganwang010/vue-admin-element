@@ -453,8 +453,9 @@ export default {
     delete: '删除',
     lock: '锁定',
     remarks: '备注',
-    phone: '電話',
-    null: '未填寫'
+    phone: '电话',
+    null: '未填写',
+    status: '状态'
   },
   customerTable: {
     table: '表格',

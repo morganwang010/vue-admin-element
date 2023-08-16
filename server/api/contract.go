@@ -38,8 +38,8 @@ func (c *ContractApi) Create(context *gin.Context) {
 // 更新合同
 func (c *ContractApi) Update(context *gin.Context) {
 	var param models.ContractUpdateParam
-	log.Println(param)
-
+	log.Println("ddddddddddddd")
+	log.Println(context.Status)
 	if err := context.ShouldBind(&param); err != nil {
 		log.Println(err)
 		response.Result(response.ErrCodeParamInvalid, nil, context)

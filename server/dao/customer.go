@@ -4,6 +4,7 @@ import (
 	"time"
 	"vue-admin-element/global"
 	"vue-admin-element/models"
+	log "github.com/sirupsen/logrus"
 )
 
 type CustomerDao struct {
@@ -43,11 +44,12 @@ func (c *CustomerDao) Update(param *models.CustomerUpdateParam) error {
 		Remarks:     param.Remarks,
 		Region:      param.Region,
 		Address:     param.Address,
-		Status:      param.Status,
+		// Status:      param.Status,
 		Updated:     time.Now(),
 		Contact:     param.Contact,
 		Importance:  param.Importance,
 	}
+	log.Println(customer.Id)
 	db := global.Db.Model(&customer).Select("*").Omit("id", "creator", "created")
 	return db.Updates(&customer).Error
 }
