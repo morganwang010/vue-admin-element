@@ -101,7 +101,6 @@ func (c *CommonDao) FileUpload(file *multipart.FileHeader) (*models.FileInfo, er
 	dist := global.Config.File.Path
 	name := common.GenUUID() + path.Ext(file.Filename)
 	log.Println(name)
-	log.Println("ddddddddddddd")
 	log.Println(dist)
 	dn := dist + name
 	src, err := file.Open()
