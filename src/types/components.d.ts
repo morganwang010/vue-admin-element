@@ -40,7 +40,6 @@ export type ComponentOptions = {
   key?: string | number
   children?: ComponentOptions[]
   options?: ComponentOptions[]
-  src?: string
 } & Recordable
 
 export type ComponentOptionsAlias = {

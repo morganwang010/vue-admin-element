@@ -31,7 +31,6 @@ getList()
 const { t } = useI18n()
 
 const crudSchemas = reactive<CrudSchema[]>([
-
   {
     field: 'cname',
     label: t('contractTable.company')
@@ -133,11 +132,15 @@ const action = (row: ContractTableData, type: string) => {
 }
 
 const writeRef = ref<ComponentRef<typeof Write>>()
-
+console.log(writeRef)
+console.log('4444444444')
 const loading = ref(false)
 
 const save = async () => {
+  console.log('0000000000')
   const write = unref(writeRef)
+  console.log('tttttttttttt')
+  console.log(write)
   await write?.elFormRef?.validate(async (isValid) => {
     if (isValid) {
       loading.value = true
@@ -256,7 +259,7 @@ const save = async () => {
       <ElButton v-if="actionType !== 'detail'" type="primary" :loading="loading" @click="save">
         {{ t('exampleDemo.save') }}
       </ElButton>
-      <ElButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</ElButton>
+      <ElButton @click="dialogVisible2 = false">{{ t('dialogDemo.close') }}</ElButton>
     </template>
   </Dialog>
 </template>

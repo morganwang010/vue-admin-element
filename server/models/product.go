@@ -27,6 +27,7 @@ type ProductCreateParam struct {
 	Description string  `json:"description" binding:"-"`
 	Status      int     `json:"status" binding:"required,oneof=1 2"`
 	Creator     int64   `json:"creator,omitempty" binding:"-"`
+	Image       string  `json:"image" binding:"-"`	
 }
 
 type ProductUpdateParam struct {
@@ -39,6 +40,7 @@ type ProductUpdateParam struct {
 	Description string  `json:"description" binding:"-"`
 	Status      int     `json:"status" binding:"required,oneof=1 2"`
 	Creator     int64   `json:"creator,omitempty" binding:"-"`
+	Image       string  `json:"image" binding:"-"`
 }
 
 type ProductDeleteParam struct {

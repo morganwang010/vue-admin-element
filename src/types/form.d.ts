@@ -19,6 +19,7 @@ export type FormItemProps = {
   showMessage?: boolean
   inlineMessage?: boolean
   style?: CSSProperties
+  src?: string
 }
 
 export type FormSchema = {

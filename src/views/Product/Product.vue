@@ -74,10 +74,6 @@ const crudSchemas = reactive<CrudSchema[]>([
     }
   },
   {
-    field: 'image',
-    label: t('productTable.image')
-  },
-  {
     field: 'created',
     label: t('productTable.createdDate')
     // formatter: (_: Recordable, __: TableColumn, cellValue: string) => {
@@ -158,16 +154,20 @@ const action = (row: ProductTableData, type: string) => {
 }
 
 const writeRef = ref<ComponentRef<typeof Write>>()
-
+const defaultFormRef = ref<ComponentRef<typeof DefaultForm>>()
 const loading = ref(false)
-
 const save = async () => {
-  const write = unref(writeRef)
-  await write?.elFormRef?.validate(async (isValid) => {
+  // const write = unref(writeRef)
+  const defaultForm = unref(defaultFormRef)
+  await defaultForm?.elFormRef?.validate(async (isValid) => {
+    // console.log(isValid)
+    console.log('3333333333')
+    // if (1 == 1) {
     if (isValid) {
       loading.value = true
-      const data = (await write?.getFormData()) as ProductTableData
-      console.log(actionType.value)
+      const data = (await defaultForm?.getFormData()) as ProductTableData
+      console.log('dddddddddddddddfffffffffffff')
+      console.log(data)
       let apiMethod
 
       if (actionType.value === 'edit') {
@@ -186,6 +186,8 @@ const save = async () => {
         tableObject.currentPage = 1
         getList()
       }
+    } else {
+      console.log('cccccccc')
     }
   })
 }
@@ -263,7 +265,7 @@ const upload = async () => {
     /> -->
     <DefaultForm
       v-if="actionType !== 'detail'"
-      :form-schema="allSchemas.formSchema"
+      ref="defaultFormRef"
       :current-row="tableObject.currentRow"
     />
     <Detail
@@ -272,18 +274,12 @@ const upload = async () => {
       :current-row="tableObject.currentRow"
     />
 
-    <template #uploadImg>
-      <ElButton v-if="actionType !== 'detail'" type="primary" :loading="loading" @click="upload">
-        {{ t('exampleDemo.save') }}
-      </ElButton>
-    </template>
-
     <template #footer>
       <ElButton v-if="actionType !== 'detail'" type="primary" :loading="loading" @click="save">
-        {{ t('exampleDemo.save') }}
+        8888888 {{ t('exampleDemo.save') }}
       </ElButton>
       <ElButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</ElButton>
     </template>
   </Dialog>
-  <Upload v-model="dialogVisible2" title="上传文件" />
+  <Upload v-if="dialogVisible2 === 'true'" title="上传文件" />
 </template>

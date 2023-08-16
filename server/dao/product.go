@@ -39,6 +39,7 @@ func (p *ProductDao) Update(param *models.ProductUpdateParam) error {
 		Price:       param.Price,
 		Description: param.Description,
 		Status:      param.Status,
+		Image:		 param.Image,
 		Updated:     time.Now(),
 	}
 	db := global.Db.Model(&product).Select("*").Omit("id", "creator", "created")

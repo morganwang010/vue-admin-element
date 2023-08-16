@@ -29,7 +29,7 @@ jwt:
 
 # 文件存储配置
 file:
-  path: /data/vue/vue-admin-element/public/upload/
+  path: D:/vue/vue-admin-element/public/upload/
 
 # 邮件服务配置
 mail:
