@@ -33,7 +33,8 @@ const { t } = useI18n()
 const crudSchemas = reactive<CrudSchema[]>([
   {
     field: 'cname',
-    label: t('contractTable.company')
+    label: t('contractTable.company'),
+    width: '350px'
   },
   {
     field: 'contact',

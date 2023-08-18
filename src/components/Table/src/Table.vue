@@ -15,6 +15,8 @@ export default defineComponent({
     currentPage: propTypes.number.def(1),
     // 是否多选
     selection: propTypes.bool.def(true),
+    // 是否自适应
+    fit: propTypes.bool.def(true),
     // 是否所有的超出隐藏，优先级低于schema中的showOverflowTooltip,
     showOverflowTooltip: propTypes.bool.def(true),
     // 表头
@@ -276,6 +278,8 @@ export default defineComponent({
           data={unref(getProps).data}
           onSelection-change={selectionChange}
           {...unref(getBindValue)}
+          fit={unref(getProps).fit}
+          class="el-table--striped"
         >
           {{
             default: () => rnderTableColumn(),
@@ -296,3 +300,8 @@ export default defineComponent({
   }
 })
 </script>
+<style>
+.el-table--striped > tbody > tr:nth-child(even) {
+  background-color: #db1515; /* 设置偶数行的背景颜色 */
+}
+</style>
