@@ -64,7 +64,8 @@ const crudSchemas = reactive<CrudSchema[]>([
   },
   {
     field: 'remarks',
-    label: t('contractTable.remarks')
+    label: t('contractTable.remarks'),
+    width: '450px'
   },
   {
     field: 'importance',

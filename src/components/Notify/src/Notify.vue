@@ -7,8 +7,11 @@ import { propTypes } from '@/utils/propTypes'
 import { useDesign } from '@/hooks/web/useDesign'
 import NoticeList from './NoticeList.vue'
 import { Bell } from '@element-plus/icons-vue'
+import { Popover, Tabs, Badge, TabPane } from 'ant-design-vue'
+import { BellOutlined } from '@ant-design/icons-vue'
+import { ref } from 'vue'
 const { getPrefixCls } = useDesign()
-
+const activeKey = ref('1')
 const props = defineProps({
   color: propTypes.string.def('')
 })
@@ -22,35 +25,42 @@ const gridData = [
     date: '2016-05-04',
     name: 'Jack',
     address: 'New York City'
-  },
-  {
-    date: '2016-05-01',
-    name: 'Jack',
-    address: 'New York City'
-  },
-  {
-    date: '2016-05-03',
-    name: 'Jack',
-    address: 'New York City'
   }
 ]
+const buttonWidth = 70
 </script>
 <template>
   <!-- <div :class="prefixCls"> -->
   <div>
-    <el-popover placement="top-start" :width="200" trigger="hover" :color="color">
-      <template #reference>
-        <el-badge :value="2" class="item" type="warning">
-          <el-icon :size="20" color="#409EFC" class="no-inherit">
-            <Bell />
-          </el-icon>
-        </el-badge>
+    <Popover placement="bottom">
+      <Badge :count="5">
+        <BellOutlined />
+      </Badge>
+
+      <template #content>
+        <Tabs v-model:activeKey="activeKey">
+          <TabPane key="1" tab="Tab 1">Content of Tab Pane 1</TabPane>
+          <TabPane key="2" tab="Tab 2" force-render>Content of Tab Pane 2</TabPane>
+          <TabPane key="3" tab="Tab 3">Content of Tab Pane 3</TabPane>
+        </Tabs>
       </template>
-      <el-table :data="gridData">
-        <el-table-column width="150" property="date" label="date" />
-        <el-table-column width="100" property="name" label="name" />
-        <el-table-column width="300" property="address" label="address" />
-      </el-table>
-    </el-popover>
+      <template #title>
+        <span>Title333</span>
+      </template>
+    </Popover>
   </div>
 </template>
+<style>
+#components-popover-demo-placement .ant-btn {
+  margin-left: 0;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  width: 70px;
+  text-align: center;
+  padding: 0;
+}
+#components-popover-demo-placement .ant-btn {
+  margin-left: 8px;
+  margin-right: 0;
+}
+</style>

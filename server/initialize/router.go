@@ -4,12 +4,24 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 	"vue-admin-element/api"
 	"vue-admin-element/global"
 	"vue-admin-element/middleware"
 
 	"github.com/gin-gonic/gin"
 )
+func TimeZoneMiddleware() gin.HandlerFunc {
+	location, err := time.LoadLocation("Asia/Shanghai")
+	if err != nil {
+		panic(err)
+	}
+
+	return func(c *gin.Context) {
+		c.Set("gin-loc", location)
+		c.Next()
+	}
+}
 
 func Router() {
 	log.SetOutput(os.Stdout)
@@ -17,10 +29,14 @@ func Router() {
 	log.SetOutput(gin.DefaultWriter) // gin.DefaultWriter 是指向 os.Stdout 的 io.Writer 接口
 
 	engine := gin.Default()
+
+	// 设置 Gin 引擎的时区
+	// gin.SetTimeZone(location)
+	
 	// gin.Debug() //启用debug模式
 	// 开启跨域
 	engine.Use(middleware.Cors())
-
+	engine.Use(TimeZoneMiddleware())
 	route := engine.Group("/api/v1")
 
 	{
@@ -40,6 +56,12 @@ func Router() {
 
 		// Jwt中间件
 		// route.Use(middleware.JwtAuth())
+
+			// 设置 WebSocket 路由
+		route.GET("/ws", middleware.WebsocketHandler())
+		// route.GET("/ws", func(c *gin.Context) {
+		// 	middleware.websocketHandler(c)
+		// })
 
 		// 客户模块
 		route.GET("/customer/list", api.NewCustomerApi().GetList)
@@ -107,5 +129,6 @@ func Router() {
 	}
 
 	// 启动、监听端口
+	
 	_ = engine.Run(fmt.Sprintf(":%v", global.Config.Server.Port))
 }

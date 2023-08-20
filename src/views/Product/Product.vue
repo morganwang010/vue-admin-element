@@ -121,7 +121,7 @@ const { allSchemas } = useCrudSchemas(crudSchemas)
 const dialogVisible = ref(false)
 const dialogVisible2 = ref(false)
 const dialogTitle = ref('')
-
+const actionType = ref('')
 const AddAction = () => {
   dialogTitle.value = t('exampleDemo.add')
   tableObject.currentRow = null
@@ -144,8 +144,6 @@ const delData = async (row: ProductTableData | null, multiple: boolean) => {
   })
 }
 
-const actionType = ref('')
-
 const action = (row: ProductTableData, type: string) => {
   dialogTitle.value = t(type === 'edit' ? 'exampleDemo.edit' : 'exampleDemo.detail')
   actionType.value = type
@@ -160,6 +158,7 @@ const loading = ref(false)
 const save = async () => {
   // const write = unref(writeRef)
   const defaultForm = unref(defaultFormRef)
+  console.log('ggggggggggggg')
   await defaultForm?.elFormRef?.validate(async (isValid) => {
     // console.log(isValid)
     // if (1 == 1) {
@@ -167,7 +166,9 @@ const save = async () => {
       loading.value = true
       const data = (await defaultForm?.getFormData()) as ProductTableData
       let apiMethod
-
+      console.log(data)
+      console.log('ddddddddddddddd')
+      console.log('offdate', data.offdate)
       if (actionType.value === 'edit') {
         apiMethod = updateProductApi
       } else {
@@ -279,5 +280,4 @@ const upload = async () => {
       <ElButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</ElButton>
     </template>
   </Dialog>
-  <Upload v-if="dialogVisible2 === 'true'" title="上传文件" />
 </template>

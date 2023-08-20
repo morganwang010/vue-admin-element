@@ -33,6 +33,14 @@ const schema1 = reactive<FormSchema[]>([
     component: 'Input'
   },
   {
+    field: 'offdate',
+    component: 'DatePicker',
+    label: t('formDemo.default'),
+    componentProps: {
+      type: 'date'
+    }
+  },
+  {
     field: 'image',
     label: t('formDemo.input'),
     component: 'Upload'

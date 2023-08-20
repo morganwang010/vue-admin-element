@@ -5,6 +5,7 @@ import (
 	"vue-admin-element/response"
 	"vue-admin-element/service"
 	"strconv"
+	// "time"
 	log "github.com/sirupsen/logrus"
 	"github.com/gin-gonic/gin"
 )
@@ -37,10 +38,17 @@ func (p *ProductApi) Create(context *gin.Context) {
 // 更新产品
 func (p *ProductApi) Update(context *gin.Context) {
 	var param models.ProductUpdateParam
+	// location, err := time.LoadLocation("Asia/Shanghai")
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// context.Set("gin-loc", location)
+	log.Println("dffffffffffffff")
 	if err := context.ShouldBind(&param); err != nil {
 		response.Result(response.ErrCodeParamInvalid, nil, context)
 		return
 	}
+	log.Println(param.Offdate)
 	errCode := p.productService.Update(&param)
 	response.Result(errCode, nil, context)
 }

@@ -1,0 +1,102 @@
+package middleware
+import (
+	"fmt"
+	"github.com/gorilla/websocket"
+	"github.com/streadway/amqp"
+	"log"
+	"net/http"
+)
+
+var upgrader = websocket.Upgrader{
+	CheckOrigin: func(r *http.Request) bool {
+		return true // 允许所有来源连接
+	},
+}
+
+func main() {
+	http.HandleFunc("/", websocketHandler)
+	go consumeAndSendMessages()
+
+	fmt.Println("WebSocket 服务器已启动，监听端口 8080")
+	err := http.ListenAndServe(":8080", nil)
+	if err != nil {
+		log.Fatal("ListenAndServe: ", err)
+	}
+}
+
+func websocketHandler(w http.ResponseWriter, r *http.Request) {
+	conn, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		log.Println("Upgrade error:", err)
+		return
+	}
+
+	// 处理 WebSocket 连接
+	handleWebSocketConnection(conn)
+}
+
+func handleWebSocketConnection(conn *websocket.Conn) {
+	defer conn.Close()
+
+	// 存储所有的 WebSocket 连接
+	connections := make(map[*websocket.Conn]bool)
+	connections[conn] = true
+
+	for {
+		_, _, err := conn.ReadMessage()
+		if err != nil {
+			delete(connections, conn)
+			break
+		}
+	}
+}
+
+func consumeAndSendMessages() {
+	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	if err != nil {
+		log.Fatalln("Failed to connect to RabbitMQ:", err)
+	}
+	defer conn.Close()
+
+	ch, err := conn.Channel()
+	if err != nil {
+		log.Fatalln("Failed to open a channel:", err)
+	}
+	defer ch.Close()
+
+	queue, err := ch.QueueDeclare(
+		"messages",
+		false,
+		false,
+		false,
+		false,
+		nil,
+	)
+	if err != nil {
+		log.Fatalln("Failed to declare a queue:", err)
+	}
+
+	msgs, err := ch.Consume(
+		queue.Name,
+		"",
+		true,
+		false,
+		false,
+		false,
+		nil,
+	)
+	if err != nil {
+		log.Fatalln("Failed to register a consumer:", err)
+	}
+
+	for msg := range msgs {
+		message := string(msg.Body)
+
+		for conn := range connections {
+			err := conn.WriteMessage(websocket.TextMessage, []byte(message))
+			if err != nil {
+				delete(connections, conn)
+			}
+		}
+	}
+}

@@ -41,6 +41,8 @@ type ProductUpdateParam struct {
 	Status      int     `json:"status" binding:"required,oneof=1 2"`
 	Creator     int64   `json:"creator,omitempty" binding:"-"`
 	Image       string  `json:"image" binding:"-"`
+	Offdate		time.Time   `json:"offdate"`
+	Created     time.Time   `json:"created"`
 }
 
 type ProductDeleteParam struct {

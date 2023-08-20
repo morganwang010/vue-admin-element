@@ -5,7 +5,7 @@ export type ProductTableData = {
   price: string
   describe: string
   status: number
-  createDate: string
-  offDate: string
+  created: string
+  offdate: string
   image:  string
 }
