@@ -158,7 +158,6 @@ const loading = ref(false)
 const save = async () => {
   // const write = unref(writeRef)
   const defaultForm = unref(defaultFormRef)
-  console.log('ggggggggggggg')
   await defaultForm?.elFormRef?.validate(async (isValid) => {
     // console.log(isValid)
     // if (1 == 1) {
@@ -166,9 +165,10 @@ const save = async () => {
       loading.value = true
       const data = (await defaultForm?.getFormData()) as ProductTableData
       let apiMethod
-      console.log(data)
-      console.log('ddddddddddddddd')
       console.log('offdate', data.offdate)
+      data.offdate = new Date(data.offdate)
+      console.log(typeof data.offdate)
+      console.log('aaaaa')
       if (actionType.value === 'edit') {
         apiMethod = updateProductApi
       } else {

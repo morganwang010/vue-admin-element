@@ -36,6 +36,11 @@ service.interceptors.request.use(
     ) {
       config.data = qs.stringify(config.data)
     }
+    if (config.method === 'put') {
+      console.log('put update the form data')
+      console.log(config.data)
+      config.data = config.data
+    }
     if (
       config.method === 'post' &&
       (config.headers as AxiosRequestHeaders)['Content-Type'] === 'multipart/form-data'

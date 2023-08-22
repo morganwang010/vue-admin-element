@@ -37,7 +37,8 @@ const schema1 = reactive<FormSchema[]>([
     component: 'DatePicker',
     label: t('formDemo.default'),
     componentProps: {
-      type: 'date'
+      type: 'date',
+      valueFormat: 'YYYY-MM-DD'
     }
   },
   {

@@ -43,7 +43,10 @@ func (p *ProductApi) Update(context *gin.Context) {
 	// 	panic(err)
 	// }
 	// context.Set("gin-loc", location)
+	log.Println(context)
 	log.Println("dffffffffffffff")
+	timeParam := context.PostForm("offdate")
+	log.Println(timeParam)
 	if err := context.ShouldBind(&param); err != nil {
 		response.Result(response.ErrCodeParamInvalid, nil, context)
 		return

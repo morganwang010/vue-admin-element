@@ -6,6 +6,6 @@ export type ProductTableData = {
   describe: string
   status: number
   created: string
-  offdate: string
+  offdate: Date
   image:  string
 }

@@ -10,6 +10,7 @@ export const createProductApi = (data: Partial<ProductTableData>): Promise<IResp
 }
 
 export const updateProductApi = (data: Partial<ProductTableData>): Promise<IResponse> => {
+  console.log(data.offdate)
   return request.put({ url: '/product/update', data })
 }
 export const delTableListApi = (ids: string[] | number[]): Promise<IResponse> => {
