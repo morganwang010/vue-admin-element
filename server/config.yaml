@@ -5,10 +5,10 @@ server:
 
 # MySQL数据库配置
 pgsql:
-  host: 10.195.1.20
-  port: 5432
+  host: localhost
+  port: 54322
   username: postgres
-  password: 1qaz@WSX
+  password: postgres
   dbname: drmp
   maxIdleConns: 10
   maxOpenConns: 100
@@ -17,7 +17,7 @@ pgsql:
 
 # Redis数据库配置
 redis:
-  host: 10.195.1.20
+  host: localhost
   port: 6379
   password: 1234
   database: 0

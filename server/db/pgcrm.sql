@@ -82,8 +82,6 @@ COMMENT ON COLUMN public.contract.updated IS '更新时间';
 INSERT INTO public.contract (id, name, amount, begin_time, over_time, remarks, cid, productlist, status, creator, created, updated) VALUES 
 (20001, '电动车交易1', 89880.00, '2023-01-28', '2023-01-30', '无备注', 1, '[{"id": 1, "name": "电动车1", "type": 1, "unit": "台", "count": 10, "price": 1498, "total": 14980}, {"id": 2, "name": "电动车2", "type": 1, "unit": "台", "count": 20, "price": 1498, "total": 29960}, {"id": 3, "name": "电动车3", "type": 1, "unit": "台", "count": 30, "price": 1498, "total": 44940}]', 1, 29, 1674900672, 0);
 
-INSERT INTO public.contract (id, name, amount, begin_time, over_time, remarks, cid, productlist, status, creator, created, updated) VALUES 
-
 
 
 CREATE TABLE public.customer (
@@ -132,7 +130,7 @@ VALUES (11, 'smtp.qq.com', 465, 'zrzxsebacrpfdaeg', '200300666@qq.com', 2, 29, 1
 
 
 select * from urls u where keywords like '%公有云%'
-update urls set status = 1;
+
 
 CREATE TABLE public.product (
   id bigserial NOT NULL, -- 编号
@@ -159,22 +157,6 @@ VALUES (2, '电动车2', 1, '台', '004', 1498.00, '代驾折叠电动车电动�
 
 
 
-CREATE TABLE public.contract (
-  id bigserial NOT NULL,
-  name character varying(200) DEFAULT NULL,
-  amount numeric(10,2) DEFAULT NULL,
-  begin_time time DEFAULT NULL,
-  over_time time DEFAULT NULL,
-  remarks character varying(80) DEFAULT NULL,
-  cid bigint DEFAULT NULL,
-  productlist jsonb DEFAULT NULL,
-  status smallint DEFAULT NULL,
-  creator bigint DEFAULT NULL,
-  created time DEFAULT NULL,
-  updated time DEFAULT NULL,
-  PRIMARY KEY (id),
-  CONSTRAINT fk_creator FOREIGN KEY (creator) REFERENCES public.user (id)
-);
 
 
 CREATE TABLE notice (

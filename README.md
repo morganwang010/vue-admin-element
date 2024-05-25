@@ -8,6 +8,7 @@
 **English** | [中文](./README.zh-CN.md)
 
 ## Introduction
+Install and config please refrence Install.md
 
 vue-element-plus-admin is a free and open source middle and background template based on `element-plus`. Developed using the latest mainstream technologies such as `vue3`, `vite4` and `typescript`, the out of the box middle and background front-end solution can be used as the starting template of the project and learning reference. And always pay attention to the latest technological trends and update them as soon as possible.
 
