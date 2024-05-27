@@ -30,7 +30,7 @@ CREATE TABLE public.user (
   id serial PRIMARY KEY,
   email character varying(30) DEFAULT NULL,
   password character varying(200) DEFAULT NULL,
-  name character varying(10) DEFAULT NULL,
+  username character varying(10) DEFAULT NULL,
   status smallint DEFAULT '1',
   created bigint DEFAULT NULL,
   updated bigint DEFAULT NULL
@@ -39,14 +39,14 @@ COMMENT ON TABLE public.user IS '用户表';
 COMMENT ON COLUMN public.user.id IS '编号';
 COMMENT ON COLUMN public.user.email IS '邮箱';
 COMMENT ON COLUMN public.user.password IS '密码';
-COMMENT ON COLUMN public.user.name IS '名称';
+COMMENT ON COLUMN public.user.username IS '名称';
 COMMENT ON COLUMN public.user.status IS '状态，1-正常，2-注销';
 COMMENT ON COLUMN public.user.created IS '创建时间';
 COMMENT ON COLUMN public.user.updated IS '更新时间'
 ;
 
-INSERT INTO public.user ("id", "email", "password", "name", "status", "created", "updated")
-VALUES (29, '1655064994@qq.com', '$2a$10$62yO.fxSfNlstacxZfTtdO2uuR9YKG6hykuVTBIMc06CEJ3BWW/Ny', '', 1, 1671191625, 0);
+INSERT INTO public.user ("id", "email", "password", "username", "status", "created", "updated")
+VALUES (29, '1655064994@qq.com', '$2a$14$0GhZwfu42R3whHYBv5mmZen7Yk1bty85UOgCPNG.BKMxy85DZWV82', 'admin', 1, 1671191625, 0);
 
 CREATE TABLE public.contract (
   id bigserial NOT NULL,
@@ -126,10 +126,6 @@ CREATE TABLE public.mail_config (
 
 INSERT INTO public.mail_config (id, stmp, port, auth_code, email, status, creator, created, updated)
 VALUES (11, 'smtp.qq.com', 465, 'zrzxsebacrpfdaeg', '200300666@qq.com', 2, 29, 1674901189, 1674901237);
-
-
-
-select * from urls u where keywords like '%公有云%'
 
 
 CREATE TABLE public.product (

@@ -35,13 +35,11 @@ func (u *UserApi) Register(context *gin.Context) {
 
 // 用户登录
 func (u *UserApi) Login(context *gin.Context) {
-	log.Printf("66666666666")
 	var param models.UserLoginParam
 	if err := context.ShouldBind(&param); err != nil {
 		response.Result(response.ErrCodeParamInvalid, nil, context)
 		return
 	}
-	log.Printf("5555555555")
 	userInfo, errCode := u.userService.Login(&param)
 	if userInfo == nil {
 		response.Result(errCode, nil, context)

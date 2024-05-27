@@ -104,6 +104,7 @@ func (u *UserService) Login(param *models.UserLoginParam) (*models.UserInfo, int
 	}
 
 	// 校验账号密码
+	log.Printf(param.Password)
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(param.Password))
 	if err != nil {
 		return nil, response.ErrCOdeUserEmailOrPass

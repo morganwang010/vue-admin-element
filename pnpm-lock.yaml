@@ -8,6 +8,9 @@ dependencies:
   '@ant-design/icons-vue':
     specifier: ^6.1.0
     version: 6.1.0(vue@3.4.27)
+  '@element-plus/icons-vue':
+    specifier: ^2.3.1
+    version: 2.3.1(vue@3.4.27)
   '@iconify-icons/ep':
     specifier: ^1.2.12
     version: 1.2.12
@@ -15,7 +18,7 @@ dependencies:
     specifier: ^1.2.10
     version: 1.2.10
   '@iconify/iconify':
-    specifier: ^3.1.0
+    specifier: ^3.1.1
     version: 3.1.1
   '@iconify/vue':
     specifier: ^4.1.1
@@ -56,6 +59,9 @@ dependencies:
   element-plus:
     specifier: 2.3.3
     version: 2.3.3(vue@3.4.27)
+  iconify-icon:
+    specifier: ^2.1.0
+    version: 2.1.0
   intro.js:
     specifier: ^7.0.1
     version: 7.2.0
@@ -5914,6 +5920,12 @@ packages:
     resolution: {integrity: sha512-yCMYTMEJ9ihCwEQQ3phLo7I/Pwycf8uAx+sRHwwk5U9Aui/IZYgQRyMqXafQOw5QQ7DM1Z+WyEXWIqSuJHhG2A==}
     dependencies:
       '@babel/runtime': 7.24.6
+    dev: false
+
+  /iconify-icon@2.1.0:
+    resolution: {integrity: sha512-lto4XU3bwTQnb+D/CsJ4dWAo0aDe+uPMxEtxyOodw9l7R9QnJUUab3GCehlw2M8mDHdeUu/ufx8PvRQiJphhXg==}
+    dependencies:
+      '@iconify/types': 2.0.0
     dev: false
 
   /iconv-lite@0.4.24:
