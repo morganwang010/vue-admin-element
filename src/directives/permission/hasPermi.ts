@@ -12,7 +12,7 @@ const appStore = useAppStoreWithOut()
 // 全部权限
 const all_permission = ['*.*.*']
 const hasPermission = (value: string | string[]): boolean => {
-  const permissions = wsCache.get(appStore.getUserInfo) as string[]
+  const permissions = wsCache.get(String(appStore.getUserInfo)) as string[]
 
   if (!value) {
     throw new Error(t('permission.hasPermission'))
@@ -33,7 +33,7 @@ function hasPermi(el: Element, binding: DirectiveBinding) {
     el.parentNode?.removeChild(el)
   }
 }
-const mounted = (el: Element, binding: DirectiveBinding<any>) => {
+const mounted = (el: Element, binding: DirectiveBinding) => {
   hasPermi(el, binding)
 }
 

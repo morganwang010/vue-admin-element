@@ -19,7 +19,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
   {
     path: '/redirect',
     component: Layout,
-    name: 'Redirect',
+    name: 'Redirect1',
     children: [
       {
         path: '/redirect/:path(.*)',

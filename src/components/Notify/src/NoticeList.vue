@@ -12,7 +12,7 @@ const props = defineProps({
     default: () => []
   },
   pageSize: {
-    type: [Boolean, Number] as PropType<Boolean | Number>,
+    type: [Boolean, Number] as PropType<boolean | number>,
     default: 5
   },
   currentPage: {
