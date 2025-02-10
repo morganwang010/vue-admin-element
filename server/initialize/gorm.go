@@ -17,7 +17,7 @@ func Pgsql() {
 
 	// var dsn = fmt.Sprintf(s, m.Username, m.Password, m.Host, m.Port, m.Dbname)
 	// fmt.Printf("********" + dsn)
-	dsn := "host=localhost port=54322 user=postgres password=postgres dbname=cms"
+	dsn := "host=localhost port=5432 user=postgres password=myS3curepass dbname=cms"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{SingularTable: true},
 	})

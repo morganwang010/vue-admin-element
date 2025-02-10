@@ -1,0 +1,13 @@
+services:  
+  redis:
+    image: redis:6-alpine
+    restart: always
+    ports:
+      - 6379:6379
+    environment:
+      REDISCLI_AUTH: 1234
+    volumes:
+      # Mount the redis data directory to the container.
+      - ./volumes/redis/data:/data
+    # Set the redis password when startup redis server.
+    command: redis-server --requirepass 1234

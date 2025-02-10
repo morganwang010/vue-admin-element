@@ -6,10 +6,10 @@ server:
 # MySQL数据库配置
 pgsql:
   host: localhost
-  port: 54322
+  port: 5432
   username: postgres
-  password: postgres
-  dbname: drmp
+  password: myS3curepass
+  dbname: crm
   maxIdleConns: 10
   maxOpenConns: 100
   connMaxLifetime: 3600

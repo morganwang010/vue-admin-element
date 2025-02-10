@@ -8,7 +8,7 @@
   remarks TEXT, --备注
   PRIMARY key (id)
 );
-drop table process 
+-- drop table process 
 
 CREATE TABLE public.urls (
   id serial PRIMARY KEY,
@@ -17,14 +17,6 @@ CREATE TABLE public.urls (
   keywords text DEFAULT NULL
 );
 
-
-select  * from product p ;
-select  * from customer c where id = 243;
-select * from user;
-
-select *  from public.user where username = 'admin'
-
-SELECT * FROM "public"."user" WHERE username = 'admin' ORDER BY "user"."id" LIMIT 1
 
 CREATE TABLE public.user (
   id serial PRIMARY KEY,
@@ -59,8 +51,8 @@ CREATE TABLE public.contract (
   productlist jsonb DEFAULT NULL,
   status smallint DEFAULT NULL,
   creator bigint DEFAULT NULL,
-  created bigint DEFAULT NULL,
-  updated bigint DEFAULT NULL,
+  created timestamp DEFAULT NULL,
+  updated timestamp DEFAULT NULL,
   PRIMARY KEY (id),
   CONSTRAINT fk_creator FOREIGN KEY (creator) REFERENCES public.user (id)
 );
@@ -89,6 +81,8 @@ CREATE TABLE public.customer (
   name varchar(50) DEFAULT NULL, -- 名称
   source char(15) DEFAULT NULL, -- 来源
   phone char(12) DEFAULT NULL, -- 手机号
+  contact int DEFAULT NULL, -- 联系次数
+  mobilephone char(12) DEFAULT NULL, -- 手机号1
   email char(20) DEFAULT NULL, -- 邮箱
   industry char(30) DEFAULT NULL, -- 所在行业
   level char(10) DEFAULT NULL, -- 级别
@@ -97,8 +91,8 @@ CREATE TABLE public.customer (
   address varchar(255) DEFAULT NULL, -- 详细地址
   status smallint DEFAULT NULL, -- 成交状态
   creator bigint DEFAULT NULL, -- 创建人
-  created bigint DEFAULT NULL, -- 创建时间
-  updated bigint DEFAULT NULL, -- 更新时间
+  created time DEFAULT NULL, -- 创建时间
+  updated time DEFAULT NULL, -- 更新时间
   PRIMARY KEY (id)
 );
 

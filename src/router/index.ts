@@ -130,7 +130,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       {
         path: 'index',
         component: () => import('@/views/Contract/Contract.vue'),
-        name: 'Contract',
+        name: 'Contract1',
         meta: {
           title: t('router.contract'),
           icon: 'cib:telegram-plane'
@@ -147,7 +147,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       {
         path: 'index',
         component: () => import('@/views/Customer/Customer.vue'),
-        name: 'Customer',
+        name: 'Customer1',
         meta: {
           title: t('router.customer'),
           icon: 'cib:telegram-plane'
@@ -164,7 +164,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       {
         path: 'index',
         component: () => import('@/views/Product/Product.vue'),
-        name: 'Product',
+        name: 'Product1',
         meta: {
           title: t('router.product'),
           icon: 'cib:telegram-plane'
@@ -181,7 +181,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       {
         path: 'index',
         component: () => import('@/views/Waterfall/Index.vue'),
-        name: 'Waterfall',
+        name: 'Waterfall1',
         meta: {
           title: t('router.waterFall'),
           icon: 'cib:telegram-plane'
@@ -198,7 +198,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       {
         path: 'index',
         component: () => import('@/views/Card/CardList.vue'),
-        name: 'CardList',
+        name: 'CardList1',
         meta: {
           title: t('router.cardList'),
           icon: 'cib:telegram-plane'
@@ -215,7 +215,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       {
         path: 'index',
         component: () => import('@/views/TimeLine/TimeLine.vue'),
-        name: 'TimeLine',
+        name: 'TimeLine1',
         meta: {
           title: t('router.timeLine'),
           icon: 'cib:telegram-plane'
@@ -232,7 +232,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       {
         path: 'index',
         component: () => import('@/views/Upload/RealResult.vue'),
-        name: 'RealResult',
+        name: 'RealResult1',
         meta: {
           title: t('router.timeLine'),
           icon: 'cib:telegram-plane'
